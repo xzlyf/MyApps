@@ -23,4 +23,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="输入对话框" />
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义Toast" />
+
+    <com.xz.xzwidget.widget.IpEditView
+        android:id="@+id/ipAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取IP地址文本" />
 </LinearLayout>
