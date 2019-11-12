@@ -4,17 +4,16 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <EditText
+    <com.xz.xzwidget.widget.AutoFocusEditView
         android:id="@+id/ip_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:imeOptions="actionNext"
         android:inputType="numberSigned"
-        android:maxLength="3"
         android:maxLines="1"
-        android:nextFocusRight="@id/ip_2"
-        android:imeOptions="actionNext"/>
+        android:nextFocusRight="@id/ip_2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,18 +25,18 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <EditText
+    <com.xz.xzwidget.widget.AutoFocusEditView
         android:id="@+id/ip_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:imeOptions="actionNext"
+
         android:inputType="numberSigned"
-        android:maxLength="3"
         android:maxLines="1"
         android:nextFocusLeft="@id/ip_1"
-        android:nextFocusRight="@id/ip_3"
-        android:imeOptions="actionNext"/>
+        android:nextFocusRight="@id/ip_3" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,18 +48,18 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <EditText
+    <com.xz.xzwidget.widget.AutoFocusEditView
         android:id="@+id/ip_3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:imeOptions="actionNext"
+
         android:inputType="numberSigned"
-        android:maxLength="3"
         android:maxLines="1"
         android:nextFocusLeft="@id/ip_2"
-        android:nextFocusRight="@id/ip_4"
-        android:imeOptions="actionNext"/>
+        android:nextFocusRight="@id/ip_4" />
 
 
     <TextView
@@ -73,16 +72,16 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <EditText
+    <com.xz.xzwidget.widget.AutoFocusEditView
         android:id="@+id/ip_4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:imeOptions="actionNext"
+
         android:inputType="numberSigned"
-        android:maxLength="3"
         android:maxLines="1"
-        android:nextFocusLeft="@id/ip_3"
-        android:imeOptions="actionNext"/>
+        android:nextFocusLeft="@id/ip_3" />
 
 </LinearLayout>

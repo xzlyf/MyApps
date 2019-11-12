@@ -38,4 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="获取IP地址文本" />
+    <com.xz.xzwidget.button.LoadingButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="加载"/>
 </LinearLayout>
