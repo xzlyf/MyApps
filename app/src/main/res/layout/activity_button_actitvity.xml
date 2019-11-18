@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ButtonActitvity">
+
+    <com.xz.xzwidget.button.XButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="XButton"
+        android:textAllCaps="false"
+        app:backgroundColor="@color/darkseagreen"
+        app:buttonRadius="24"
+        app:buttonStrokeWidth="4"
+        app:isFill="true" />
+
+    <com.xz.xzwidget.button.XButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="左上"
+        android:textAllCaps="false"
+        app:backgroundColor="@color/darkseagreen"
+        app:buttonRadius="24"
+        app:buttonStrokeWidth="4"
+        app:buttonTextColor="@color/black"
+        app:isFill="false"
+        app:whiceCirc="topLeft" />
+
+    <com.xz.xzwidget.button.XButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="右上"
+        android:textAllCaps="false"
+        app:backgroundColor="@color/darkseagreen"
+        app:buttonRadius="24"
+        app:buttonStrokeWidth="4"
+        app:buttonTextColor="@color/black"
+        app:isFill="false"
+        app:whiceCirc="topRight" />
+
+    <com.xz.xzwidget.button.XButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="左上反转"
+        android:textAllCaps="false"
+        app:backgroundColor="@color/darkseagreen"
+        app:buttonRadius="24"
+        app:buttonStrokeWidth="4"
+        app:buttonTextColor="@color/black"
+        app:isFill="false"
+        app:isReversal="true"
+        app:whiceCirc="topLeft" />
+
+    <com.xz.xzwidget.button.XButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="右上反转"
+        android:textAllCaps="false"
+        app:backgroundColor="@color/darkseagreen"
+        app:buttonRadius="24"
+        app:buttonStrokeWidth="4"
+        app:buttonTextColor="@color/black"
+        app:isFill="false"
+        app:isReversal="true"
+        app:whiceCirc="topRight" />
+
+
+</LinearLayout>

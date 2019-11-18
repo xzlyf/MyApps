@@ -71,6 +71,7 @@ public class XzTipsDialog extends Dialog {
         super.show();
         //----------标题设置-----------------
         if (!TextUtils.isEmpty(titleText)) {
+            tvtitle.setText(titleText);
             tvtitle.setVisibility(View.VISIBLE);
             tvtitle.setTextSize(titleTextSize);
             tvtitle.setBackgroundResource(titleBackgroundResource);

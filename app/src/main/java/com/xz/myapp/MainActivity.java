@@ -1,5 +1,6 @@
 package com.xz.myapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -8,8 +9,13 @@ import com.xz.xzwidget.XType;
 import com.xz.xzwidget.dialog.XOnClickListener;
 import com.xz.xzwidget.dialog.XzInputDialog;
 import com.xz.xzwidget.dialog.XzTipsDialog;
+import com.xz.xzwidget.entity.CommEntity;
+import com.xz.xzwidget.recycler.XBanner;
 import com.xz.xzwidget.toast.XToast;
 import com.xz.xzwidget.widget.IpEditView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +35,10 @@ public class MainActivity extends BaseActivity {
     IpEditView ipAddress;
     @BindView(R.id.btn5)
     Button btn5;
+    @BindView(R.id.banner)
+    XBanner banner;
+    @BindView(R.id.btn6)
+    Button btn6;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -42,6 +52,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        List<CommEntity> list = new ArrayList<>();
+        list.add(new CommEntity("https://s2.ax1x.com/2019/11/14/MtnWCT.jpg", "内容1"));
+        list.add(new CommEntity("https://s2.ax1x.com/2019/11/14/MtngU0.jpg", "内容2"));
+        list.add(new CommEntity("https://s2.ax1x.com/2019/11/14/Mtn25V.jpg", "内容3"));
+        banner.load(list);
     }
 
     @OnClick(R.id.btn1)
@@ -84,7 +99,13 @@ public class MainActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn5)
-    public void btn5(){
-        XToast.showToast(this,ipAddress.getIp(),XType.XTOAST_TYPE_SUCCESS);
+    public void btn5() {
+        XToast.showToast(this, ipAddress.getIp(), XType.XTOAST_TYPE_SUCCESS);
     }
+
+    @OnClick(R.id.btn6)
+    public void btn6() {
+        startActivity(new Intent(this, ButtonActitvity.class));
+    }
+
 }
