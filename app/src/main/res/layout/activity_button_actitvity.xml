@@ -72,5 +72,13 @@
         app:isReversal="true"
         app:whiceCirc="topRight" />
 
+    <com.xz.xzwidget.button.LoadingButton
+        android:id="@+id/load_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:buttonRadius="24"
+        android:text="LoadingButton"/>
+
 
 </LinearLayout>

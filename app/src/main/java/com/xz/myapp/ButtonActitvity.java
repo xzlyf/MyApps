@@ -1,13 +1,21 @@
 package com.xz.myapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 
 import com.xz.myapp.base.BaseActivity;
+import com.xz.xzwidget.button.LoadingButton;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ButtonActitvity extends BaseActivity {
 
+
+    @BindView(R.id.load_btn)
+    LoadingButton loadBtn;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -15,12 +23,28 @@ public class ButtonActitvity extends BaseActivity {
     }
 
     @Override
+    public int getLayoutResource() {
+        return R.layout.activity_button_actitvity;
+    }
+
+    @Override
     public void initData() {
 
     }
 
-    @Override
-    public int getLayoutResource() {
-        return R.layout.activity_button_actitvity;
+    @OnClick(R.id.load_btn)
+    public void loadBtn() {
+        loadBtn.setText("开始下载");
+        loadBtn.setOverColor(Color.parseColor("#DEB887"));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 101; i++) {
+                    loadBtn.updateValue(i);
+                    SystemClock.sleep(60);
+                }
+            }
+        }).start();
     }
+
 }

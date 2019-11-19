@@ -165,7 +165,7 @@ public class XButton extends AppCompatButton {
         //GradientDrawable是shape的动态实现，可通过动态的获取控件的shape获取实例并进行修改
         GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadii(radiu);
-        drawable.setColor(isFill ? color : Color.TRANSPARENT);
+        drawable.setColor(isFill ? color : Color.WHITE);
         drawable.setStroke(isFill ? 0 : strokeWidth, color);
         setBackgroundDrawable(drawable);
     }

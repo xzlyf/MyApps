@@ -49,9 +49,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     public abstract boolean homeAsUpEnabled();
 
+    public abstract int getLayoutResource();
+
     public abstract void initData();
 
-    public abstract int getLayoutResource();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
