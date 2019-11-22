@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="自定义Toast" />
 
-    <com.xz.xzwidget.widget.IpEditView
+    <com.xz.widget.widget.IpEditView
         android:id="@+id/ipAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:text="获取IP地址文本" />
 
-    <com.xz.xzwidget.recycler.XBanner
+    <com.xz.widget.recycler.XBanner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -1,1 +1,1 @@
-include ':app',':xzwidget', ':base'
+include ':app', ':widget', ':base'

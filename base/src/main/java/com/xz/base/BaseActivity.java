@@ -7,8 +7,8 @@ import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.xz.xzwidget.dialog.XOnClickListener;
-import com.xz.xzwidget.dialog.XzLoadingDialog;
+import com.xz.widget.dialog.XOnClickListener;
+import com.xz.widget.dialog.XzLoadingDialog;
 
 import butterknife.ButterKnife;
 

@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.widget.Button;
 
 import com.xz.base.BaseActivity;
-import com.xz.xzwidget.XType;
-import com.xz.xzwidget.dialog.XOnClickListener;
-import com.xz.xzwidget.dialog.XzInputDialog;
-import com.xz.xzwidget.dialog.XzTipsDialog;
-import com.xz.xzwidget.entity.CommEntity;
-import com.xz.xzwidget.recycler.XBanner;
-import com.xz.xzwidget.toast.XToast;
-import com.xz.xzwidget.widget.IpEditView;
+import com.xz.widget.XType;
+import com.xz.widget.dialog.XOnClickListener;
+import com.xz.widget.dialog.XzInputDialog;
+import com.xz.widget.dialog.XzTipsDialog;
+import com.xz.widget.entity.CommEntity;
+import com.xz.widget.recycler.XBanner;
+import com.xz.widget.toast.XToast;
+import com.xz.widget.widget.IpEditView;
 
 import java.util.ArrayList;
 import java.util.List;

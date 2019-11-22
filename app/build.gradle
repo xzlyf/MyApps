@@ -47,7 +47,7 @@ dependencies {
     //logger
     implementation 'com.orhanobut:logger:1.15'
 
-    implementation project(path: ':xzwidget')
+    implementation project(path: ':widget')
     implementation project(path: ':base')
 
 }
