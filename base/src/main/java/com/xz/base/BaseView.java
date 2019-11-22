@@ -5,6 +5,6 @@ public interface BaseView {
     void disLoading();
     void sToast(String text);
     void lToast(String text);
-    void sDialog(String title, String msg, int type);
+    void sDialog(String title, String msg);
     void dDialog();
 }
