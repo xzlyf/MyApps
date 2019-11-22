@@ -1,4 +1,4 @@
-package com.xz.myapp.base;
+package com.xz.base;
 
 public interface BaseView {
     void showLoading(String text);

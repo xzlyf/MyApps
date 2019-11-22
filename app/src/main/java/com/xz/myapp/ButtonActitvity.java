@@ -1,14 +1,12 @@
 package com.xz.myapp;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.SystemClock;
 
-import com.xz.myapp.base.BaseActivity;
+import com.xz.base.BaseActivity;
 import com.xz.xzwidget.button.LoadingButton;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ButtonActitvity extends BaseActivity {

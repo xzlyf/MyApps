@@ -1,10 +1,9 @@
 package com.xz.myapp;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.Button;
 
-import com.xz.myapp.base.BaseActivity;
+import com.xz.base.BaseActivity;
 import com.xz.xzwidget.XType;
 import com.xz.xzwidget.dialog.XOnClickListener;
 import com.xz.xzwidget.dialog.XzInputDialog;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {

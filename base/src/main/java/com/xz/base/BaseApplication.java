@@ -1,4 +1,4 @@
-package com.xz.myapp;
+package com.xz.base;
 
 import android.app.Activity;
 import android.app.Application;
@@ -8,9 +8,9 @@ import com.orhanobut.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyApplication extends Application {
+public class BaseApplication extends Application {
     private List<Activity> activities = new ArrayList<>();
-    private static MyApplication instance;
+    private static BaseApplication instance;
 
     @Override
     public void onCreate() {
@@ -27,7 +27,7 @@ public class MyApplication extends Application {
                 .methodOffset(2);             // 默认：0
     }
 
-    public static MyApplication getInstance() {
+    public static BaseApplication getInstance() {
         return instance;
     }
 

@@ -1,4 +1,4 @@
-package com.xz.myapp.base;
+package com.xz.base;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,11 +7,8 @@ import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.xz.myapp.MyApplication;
 import com.xz.xzwidget.dialog.XOnClickListener;
 import com.xz.xzwidget.dialog.XzLoadingDialog;
-
-import org.jetbrains.annotations.NotNull;
 
 import butterknife.ButterKnife;
 
@@ -44,7 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void onDestroy() {
         super.onDestroy();
         //结束Activity&从集合中移除
-        MyApplication.getInstance().finishActivity(this);
+        BaseApplication.getInstance().finishActivity(this);
     }
 
     public abstract boolean homeAsUpEnabled();
@@ -90,7 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Override
-    public void sToast(@NotNull String text) {
+    public void sToast(String text) {
     }
 
     @Override
