@@ -8,6 +8,7 @@ public class Local {
     //待申请权限列表
     public static final String[] permission = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.INTERNET
     };
 }
