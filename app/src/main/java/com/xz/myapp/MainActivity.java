@@ -1,6 +1,7 @@
 package com.xz.myapp;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Button;
 
 import com.xz.base.BaseActivity;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
@@ -37,6 +39,8 @@ public class MainActivity extends BaseActivity {
     XBanner banner;
     @BindView(R.id.btn6)
     Button btn6;
+    @BindView(R.id.btn7)
+    Button btn7;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -105,5 +109,11 @@ public class MainActivity extends BaseActivity {
     public void btn6() {
         startActivity(new Intent(this, ButtonActitvity.class));
     }
+
+    @OnClick(R.id.btn7)
+    public void btn7() {
+        startActivity(new Intent(this, SystemInfoActivity.class));
+    }
+
 
 }

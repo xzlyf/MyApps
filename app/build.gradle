@@ -49,5 +49,6 @@ dependencies {
 
     implementation project(path: ':widget')
     implementation project(path: ':base')
+    implementation project(path: ':utils')
 
 }
