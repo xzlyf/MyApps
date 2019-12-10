@@ -29,16 +29,16 @@ import com.xz.widget.dialog.XzTipsDialog;
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+    protected final String TAG = this.getClass().getSimpleName();
 
-    private Activity mContext;
+    protected Activity mContext;
     private XzLoadingDialog xzLoadingDialog;
     private XzTipsDialog xzTipsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //申请权限
-        initPermission();
+
         setContentView(getLayoutResource());
         ButterKnife.bind(this);
         mContext = this;
@@ -51,7 +51,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
             }
         }
-        initData();
+
+        //申请权限
+        initPermission();
+
 
     }
 
@@ -73,7 +76,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * 申请权限
      */
     public void initPermission() {
-        Logger.d(Local.flag);
         if (Local.flag == -1) {
             Local.flag = 0;
 
@@ -83,8 +85,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 //权限列表在Local全局类里，需要增加权限去local里增加
                 for (String s : Local.permission) {
                     if (ContextCompat.checkSelfPermission(this, s) != PackageManager.PERMISSION_GRANTED) {
-                        //没有有权
+                        //没有权限
                         noPermission = true;
+                        Logger.w(s);
                     }
                 }
 
@@ -108,10 +111,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                             .create();
 
                     dialog.show();
+                }else {
+                    initData();
                 }
 
+            } else {
+                initData();
             }
 
+        } else {
+            initData();
         }
     }
 
@@ -132,9 +141,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                     //成功
                 } else {
                     //失败
-
                 }
             }
+            //给不给权限都给进了
+            initData();
+
         }
 
 
