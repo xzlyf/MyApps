@@ -44,10 +44,6 @@
         android:layout_height="wrap_content"
         android:text="获取IP地址文本" />
 
-    <com.xz.widget.recycler.XBanner
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 
     <Button
@@ -60,6 +56,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="系统信息工具类"/>
+
+    <com.xz.widget.widget.SlideUnLockView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

@@ -35,8 +35,6 @@ public class MainActivity extends BaseActivity {
     IpEditView ipAddress;
     @BindView(R.id.btn5)
     Button btn5;
-    @BindView(R.id.banner)
-    XBanner banner;
     @BindView(R.id.btn6)
     Button btn6;
     @BindView(R.id.btn7)
@@ -54,11 +52,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        List<CommEntity> list = new ArrayList<>();
-        list.add(new CommEntity("https://s2.ax1x.com/2019/11/14/MtnWCT.jpg", "内容1"));
-        list.add(new CommEntity("https://s2.ax1x.com/2019/11/14/MtngU0.jpg", "内容2"));
-        list.add(new CommEntity("https://s2.ax1x.com/2019/11/14/Mtn25V.jpg", "内容3"));
-        banner.load(list);
     }
 
     @OnClick(R.id.btn1)
