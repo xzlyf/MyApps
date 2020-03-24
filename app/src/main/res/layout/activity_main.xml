@@ -45,21 +45,17 @@
         android:text="获取IP地址文本" />
 
 
-
     <Button
         android:id="@+id/btn6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="常用按钮"/>
+        android:text="常用按钮" />
+
     <Button
         android:id="@+id/btn7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="系统信息工具类"/>
-
-    <com.xz.widget.widget.SlideUnLockView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="系统信息工具类" />
 
 
 </LinearLayout>
