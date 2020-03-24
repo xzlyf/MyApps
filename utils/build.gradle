@@ -41,3 +41,16 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
 }
+
+apply plugin: 'maven'
+uploadArchives {
+    repositories.mavenDeployer {
+        def mavenDirPath = file('F:\\WorkSpace\\maven')
+        repository(url: "file://${mavenDirPath.absolutePath}")
+        pom.project {
+            groupId "com.xz.maven.android"
+            artifactId "utils"
+            version "1.0.0"
+        }
+    }
+}

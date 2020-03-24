@@ -39,6 +39,8 @@ public class MainActivity extends BaseActivity {
     Button btn6;
     @BindView(R.id.btn7)
     Button btn7;
+    @BindView(R.id.btn8)
+    Button btn8;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -106,6 +108,10 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.btn7)
     public void btn7() {
         startActivity(new Intent(this, SystemInfoActivity.class));
+    }
+    @OnClick(R.id.btn8)
+    public void btn8() {
+        startActivity(new Intent(this, AnimActivity.class));
     }
 
 

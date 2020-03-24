@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SystemInfoActivity"></activity>
+        <activity android:name=".AnimActivity"></activity>
+        <activity android:name=".SystemInfoActivity" />
         <activity android:name=".ButtonActitvity" />
         <activity android:name=".MainActivity">
             <intent-filter>
