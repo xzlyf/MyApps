@@ -92,9 +92,9 @@ public class SportsView extends View {
         //sweepAngle: 圆弧扫过的角度，顺时针方向，单位为度。
         //useCenter: 如果为True时，在绘制圆弧时将圆心包括在内，通常用来绘制扇形。如果false会将圆弧的两端用直线连接
         //paint: 绘制圆弧的画板属性，如颜色，是否填充等
-        canvas.drawArc(rect, 135, 360 * (progress / 100), true, paint);
-        canvas.drawArc(innerRect, 135, 360 * (progress / 100), true, innerPaint);
-        canvas.drawText(progress + "%", rectWidth / 2, rectWidth / 2, paint);
+            canvas.drawArc(rect, 135, 360 * (progress / 100), true, paint);
+            canvas.drawArc(innerRect, 135, 360 * (progress / 100), true, innerPaint);
+            canvas.drawText(progress + "%", rectWidth / 2, rectWidth / 2, paint);
 
     }
 

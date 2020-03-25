@@ -8,6 +8,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 
 import com.xz.base.BaseActivity;
+import com.xz.widget.widget.SlideHorizontalView;
 import com.xz.widget.widget.SportsView;
 
 import butterknife.BindView;
@@ -19,6 +20,8 @@ public class AnimActivity extends BaseActivity implements View.OnClickListener {
     SportsView sportsView;
     @BindView(R.id.btn_1)
     Button btn1;
+    @BindView(R.id.slide_h)
+    SlideHorizontalView slideHorizontalView;
 
     private boolean isClick = false;
 

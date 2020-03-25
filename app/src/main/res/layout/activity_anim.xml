@@ -6,15 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AnimActivity">
+
     <Button
         android:id="@+id/btn_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="简单属性动画"/>
+        android:text="简单属性动画" />
 
     <com.xz.widget.widget.SportsView
         android:id="@+id/sports_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <com.xz.widget.widget.SlideHorizontalView
+        android:id="@+id/slide_h"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
