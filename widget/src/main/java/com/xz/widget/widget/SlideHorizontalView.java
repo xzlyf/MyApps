@@ -1,23 +1,18 @@
 package com.xz.widget.widget;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.animation.OvershootInterpolator;
 
 import androidx.annotation.IntRange;
 import androidx.annotation.RequiresApi;
-
-import java.util.logging.Logger;
 
 /**
  * @author czr
@@ -43,6 +38,8 @@ public class SlideHorizontalView extends View {
     private float distance;//字高度
     private int textSize = 42;//字体大小
     private int value = 0; //用户设置value
+    private float progress = 0;
+    private ObjectAnimator animator;//动画
 
 
     /**
@@ -91,6 +88,10 @@ public class SlideHorizontalView extends View {
         //获取文字的中心的位置
         distance = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
         textPrint.setTextSize(0);
+
+        animator = ObjectAnimator.ofFloat(this, "progress", 0, 0);
+        animator.setInterpolator(new OvershootInterpolator(1f));//有回弹效果
+        animator.setDuration(800);
 
     }
 
@@ -194,6 +195,27 @@ public class SlideHorizontalView extends View {
      */
     public void setValue(@IntRange(from = 0, to = 100) int value) {
         this.value = value;
+        //通过百分比数值获取mX的位置
+        float i = (float) value / 100;
+        mX = (int) (i * (mWidthSize - paddingLeft * 2)) + paddingLeft;
+        invalidate();
+    }
+
+    public float getProgress() {
+        return progress;
+    }
+
+    /**
+     * 设置数值显示位置
+     * 动画调用
+     *
+     * @param progress
+     */
+    public void setProgress(float progress) {
+        this.progress = progress;
+        float i = (float) progress / 100;
+        mX = (int) (i * (mWidthSize - paddingLeft * 2)) + paddingLeft;
+        invalidate();
     }
 
     /**
@@ -207,5 +229,16 @@ public class SlideHorizontalView extends View {
         } else {
             textSize = 42;
         }
+    }
+
+    /**
+     * 播放动画，设置范围
+     *
+     * @param start
+     * @param end
+     */
+    public void startAnim(int start, int end) {
+        animator.setFloatValues(start, end);
+        animator.start();
     }
 }

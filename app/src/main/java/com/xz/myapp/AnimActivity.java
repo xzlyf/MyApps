@@ -46,25 +46,20 @@ public class AnimActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_1:
                 if (isClick) {
-                    btn1.animate().translationXBy(-200).scaleY(1f).scaleX(1f);
+                    btn1.animate().scaleY(1f).scaleX(1f);
                     isClick = false;
-                    showSportViewAnim(65, 0);
+                    slideHorizontalView.startAnim(65, 0);
+                    sportsView.startAnim(65, 0);
+
 
                 } else {
-                    btn1.animate().translationX(200).scaleY(0.8f).scaleX(0.8f);
+                    btn1.animate().scaleY(0.7f).scaleX(0.8f);
                     isClick = true;
-                    showSportViewAnim(0, 65);
+                    slideHorizontalView.startAnim(0, 65);
+                    sportsView.startAnim(0, 65);
                 }
                 break;
         }
-    }
-
-    private void showSportViewAnim(int startValue, int endValue) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(sportsView, "progress", startValue, endValue);
-        animator.setDuration(800);
-        animator.setInterpolator(new OvershootInterpolator(1f));//有回弹效果
-//        animator.setInterpolator(new AnticipateOvershootInterpolator(1));
-        animator.start();
     }
 
 
