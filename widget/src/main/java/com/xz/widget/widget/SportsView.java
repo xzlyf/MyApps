@@ -29,13 +29,13 @@ public class SportsView extends View {
     private RectF rect;
     private RectF innerRect;
     private int viewHeight = 600;//view默认高度
-    private int rectWidth = 500;//外圆大小
-    private int innerRectWidth = 450;//内圆大小
+    private int rectWidth = 500;//外圆大小 默认大小
+    private int innerRectWidth = 450;//内圆大小 默认大小 规则：内圆=外圆-50
     private float distance;//字高度
     private int centerX;//view中心点X
     private int centerY;//view中心点Y
-    private int rectRadiu;//圆半径
-    private int innerRectRadiu;//圆半径
+    private int rectRadiu;//外圆半径
+    private int innerRectRadiu;//内圆半径
 
     private ObjectAnimator animator;//动画
 
@@ -78,8 +78,7 @@ public class SportsView extends View {
         //获取文字的中心的位置
         distance = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
 
-        innerRectRadiu = innerRectWidth / 2;
-        rectRadiu = rectWidth / 2;
+
         animator = ObjectAnimator.ofFloat(this, "progress", 0, 0);
         animator.setDuration(800);
         animator.setInterpolator(new OvershootInterpolator(1f));//有回弹效果
@@ -148,12 +147,16 @@ public class SportsView extends View {
             mHeight = viewHeight;
 
         }
+        //更新一系列view的宽高
         centerX = mWidth / 2;
         centerY = mHeight / 2;
+        rectWidth = mWidth / 2;
+        innerRectWidth = rectWidth - 50;
+        innerRectRadiu = innerRectWidth / 2;
+        rectRadiu = rectWidth / 2;
+
         Log.i(TAG, "onMeasure: " + mWidth);
         Log.i(TAG, "onMeasure: " + mHeight);
-
-
     }
 
     public float getProgress() {

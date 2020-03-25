@@ -2,10 +2,13 @@ package com.xz.myapp;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 import com.xz.base.BaseActivity;
 import com.xz.widget.widget.SlideHorizontalView;
 import com.xz.widget.widget.SportsView;
+
+import java.util.Random;
 
 import butterknife.BindView;
 
@@ -13,13 +16,16 @@ public class WidgetActivity extends BaseActivity implements View.OnClickListener
 
     @BindView(R.id.sports_view)
     SportsView sportsView;
+    @BindView(R.id.sports_view_2)
+    SportsView sportsView2;
+
     @BindView(R.id.btn_1)
     Button btn1;
     @BindView(R.id.slide_h)
     SlideHorizontalView slideHorizontalView;
 
     private boolean isClick = false;
-
+    private int randomNum;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -34,6 +40,15 @@ public class WidgetActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initData() {
         btn1.setOnClickListener(this);
+        Random random = new Random();
+        randomNum = random.nextInt(100);
+        slideHorizontalView.setOnScrollListener(new SlideHorizontalView.OnScrollListener() {
+            @Override
+            public void onScroll(int value) {
+                sportsView.setProgress(value);
+                sportsView2.setProgress(value);
+            }
+        });
     }
 
     @Override
@@ -43,15 +58,17 @@ public class WidgetActivity extends BaseActivity implements View.OnClickListener
                 if (isClick) {
                     btn1.animate().scaleY(1f).scaleX(1f);
                     isClick = false;
-                    slideHorizontalView.startAnim(65, 0);
-                    sportsView.startAnim(65, 0);
+                    slideHorizontalView.startAnim(randomNum, 0);
+                    sportsView.startAnim(randomNum, 0);
+                    sportsView2.startAnim(randomNum, 0);
 
 
                 } else {
                     btn1.animate().scaleY(0.7f).scaleX(0.8f);
                     isClick = true;
-                    slideHorizontalView.startAnim(0, 65);
-                    sportsView.startAnim(0, 65);
+                    slideHorizontalView.startAnim(0, randomNum);
+                    sportsView.startAnim(0, randomNum);
+                    sportsView2.startAnim(0, randomNum);
                 }
                 break;
         }

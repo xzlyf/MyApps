@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
@@ -46,6 +47,7 @@ public class SlideHorizontalView extends View {
     private int value = 0; //用户设置value
     private float progress = 0;
     private ObjectAnimator animator;//动画
+    private OnScrollListener mListener;//滑动监听
 
 
     /**
@@ -101,6 +103,13 @@ public class SlideHorizontalView extends View {
         animator = ObjectAnimator.ofFloat(this, "progress", 0, 0);
         animator.setInterpolator(new OvershootInterpolator(1f));//有回弹效果
         animator.setDuration(800);
+
+        mListener = new OnScrollListener() {
+            @Override
+            public void onScroll(int value) {
+                Log.i(TAG, "onScroll: " + value);
+            }
+        };
 
     }
 
@@ -184,6 +193,8 @@ public class SlideHorizontalView extends View {
 
                 if (moveX > paddingLeft && moveX < mWidthSize - paddingLeft) {
                     mX = moveX;
+
+                    mListener.onScroll(getValue());
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -263,5 +274,16 @@ public class SlideHorizontalView extends View {
     public void startAnim(int start, int end) {
         animator.setFloatValues(start, end);
         animator.start();
+    }
+
+    public void setOnScrollListener(OnScrollListener listener) {
+        mListener = listener;
+    }
+
+    /**
+     * 滑动监听
+     */
+    public interface OnScrollListener {
+        void onScroll(int value);
     }
 }
