@@ -45,12 +45,16 @@ dependencies {
 apply plugin: 'maven'
 uploadArchives {
     repositories.mavenDeployer {
-        def mavenDirPath = file('F:\\WorkSpace\\maven')
+        def mavenDirPath = file('E:\\xz\\maven')
         repository(url: "file://${mavenDirPath.absolutePath}")
         pom.project {
             groupId "com.xz.maven.android"
             artifactId "utils"
             version "1.0.0"
         }
+
     }
 }
+
+//打包成远程maven需要java8以上
+//在AS终端输入gradlew :utils:uploadArchives //utils为库名
