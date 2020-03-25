@@ -2,6 +2,7 @@ package com.xz.widget.widget;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,6 +14,8 @@ import android.view.animation.OvershootInterpolator;
 
 import androidx.annotation.IntRange;
 import androidx.annotation.RequiresApi;
+
+import com.xz.xzwidget.R;
 
 /**
  * @author czr
@@ -32,6 +35,9 @@ public class SlideHorizontalView extends View {
     private Paint mLinePrint;//线画笔、外圆
     private Paint mInnerPrint;//内圆画笔
     private Paint textPrint;//文字画笔
+    private int mainColor;//主色调
+    private int textColor;//文字色
+    private int secondColor;//辅助色
     private int radius = 50;//外圆半径
     private int innerRadius = 40;//内圆半径
     private int moveX;
@@ -61,24 +67,27 @@ public class SlideHorizontalView extends View {
      */
     public SlideHorizontalView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        init(context, attrs);
     }
 
-    private void init(Context context) {
+    private void init(Context context, AttributeSet attrs) {
+        initTypeAttr(context, attrs);
+
+
         mLinePrint = new Paint();
-        mLinePrint.setColor(Color.BLACK);
+        mLinePrint.setColor(mainColor);
         mLinePrint.setStrokeCap(Paint.Cap.ROUND);
         mLinePrint.setStrokeWidth(12);
         mLinePrint.setStyle(Paint.Style.FILL); //描边效果
 
         mInnerPrint = new Paint();
-        mInnerPrint.setColor(Color.WHITE);
+        mInnerPrint.setColor(secondColor);
         mInnerPrint.setStrokeCap(Paint.Cap.ROUND);
         mInnerPrint.setStrokeWidth(16);
         mInnerPrint.setStyle(Paint.Style.FILL);
 
         textPrint = new Paint();
-        textPrint.setColor(Color.BLACK);
+        textPrint.setColor(textColor);
         textPrint.setStrokeCap(Paint.Cap.ROUND);
         textPrint.setStrokeWidth(4);
         textPrint.setTextSize(textSize);
@@ -93,6 +102,20 @@ public class SlideHorizontalView extends View {
         animator.setInterpolator(new OvershootInterpolator(1f));//有回弹效果
         animator.setDuration(800);
 
+    }
+
+    /**
+     * 初始化属性
+     */
+    private void initTypeAttr(Context context, AttributeSet attrs) {
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.SlideHorizontalView);
+        mainColor = array.getColor(R.styleable.SlideHorizontalView_x_main_color, Color.BLACK);
+        secondColor = array.getColor(R.styleable.SlideHorizontalView_x_second_color, Color.WHITE);
+        textColor = array.getColor(R.styleable.SlideHorizontalView_x_text_color, Color.BLACK);
+        value = array.getInt(R.styleable.SlideHorizontalView_x_default_value, 0);
+        boolean isShowNumber = array.getBoolean(R.styleable.SlideHorizontalView_x_show_number, true);
+        setTextEnable(isShowNumber);
+        array.recycle();
     }
 
     @Override

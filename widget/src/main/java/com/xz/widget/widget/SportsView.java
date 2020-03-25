@@ -2,6 +2,7 @@ package com.xz.widget.widget;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,12 +15,17 @@ import android.view.animation.OvershootInterpolator;
 
 import androidx.annotation.Nullable;
 
+import com.xz.xzwidget.R;
+
 public class SportsView extends View {
     private final String TAG = "SportsView";
+    private int angle = 135;//圆角开始度数
     private int mHeight, mWidth;
     private float progress = 0;
     private Paint paint;
     private Paint innerPaint;
+    private int mainColor;//主色调
+    private int secondColor;//辅助色
     private RectF rect;
     private RectF innerRect;
     private int viewHeight = 600;//view默认高度
@@ -34,32 +40,32 @@ public class SportsView extends View {
     private ObjectAnimator animator;//动画
 
     public SportsView(Context context) {
-        super(context);
-        init(context);
+        this(context, null);
     }
 
     public SportsView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
+        this(context, attrs, 0);
 
     }
 
     public SportsView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        init(context, attrs);
 
     }
 
-    private void init(Context context) {
+    private void init(Context context, AttributeSet attrs) {
+        initTypeArrt(context, attrs);
+
         paint = new Paint();
-        paint.setColor(Color.RED);
+        paint.setColor(mainColor);
         paint.setAntiAlias(true);//抗锯齿
         paint.setStrokeWidth(15f);//描边宽度
         paint.setTextSize(58f);
         paint.setTextAlign(Paint.Align.CENTER);//文字居中
 
         innerPaint = new Paint();
-        innerPaint.setColor(Color.WHITE);
+        innerPaint.setColor(secondColor);
         innerPaint.setAntiAlias(true);//抗锯齿
         innerPaint.setStrokeWidth(18f);//描边宽度
 
@@ -77,6 +83,22 @@ public class SportsView extends View {
         animator = ObjectAnimator.ofFloat(this, "progress", 0, 0);
         animator.setDuration(800);
         animator.setInterpolator(new OvershootInterpolator(1f));//有回弹效果
+
+    }
+
+    /**
+     * 加载属性资源
+     *
+     * @param context
+     * @param attrs
+     */
+    private void initTypeArrt(Context context, AttributeSet attrs) {
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.SportsView);
+        mainColor = array.getColor(R.styleable.SportsView_x_mainColor, Color.BLACK);
+        secondColor = array.getColor(R.styleable.SportsView_x_secondColor, Color.WHITE);
+        angle = array.getInt(R.styleable.SportsView_x_angleStart, 135);
+        progress = array.getInt(R.styleable.SportsView_x_defaultValue, 0);
+        array.recycle();
 
     }
 
@@ -99,11 +121,9 @@ public class SportsView extends View {
         //sweepAngle: 圆弧扫过的角度，顺时针方向，单位为度。
         //useCenter: 如果为True时，在绘制圆弧时将圆心包括在内，通常用来绘制扇形。如果false会将圆弧的两端用直线连接
         //paint: 绘制圆弧的画板属性，如颜色，是否填充等
-
         //外圆
-        canvas.drawArc(rect, 135, 360 * (progress / 100), true, paint);
+        canvas.drawArc(rect, angle, 360 * (progress / 100), true, paint);
         //内圆
-//        canvas.drawArc(innerRect, 135, 360 * (progress / 100), true, innerPaint);
         canvas.drawArc(innerRect, 0, 360, true, innerPaint);
         //文字
         canvas.drawText(String.format("%.0f", progress) + "%", centerX, centerY + distance, paint);
@@ -132,6 +152,8 @@ public class SportsView extends View {
         centerY = mHeight / 2;
         Log.i(TAG, "onMeasure: " + mWidth);
         Log.i(TAG, "onMeasure: " + mHeight);
+
+
     }
 
     public float getProgress() {

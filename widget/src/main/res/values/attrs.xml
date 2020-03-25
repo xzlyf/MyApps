@@ -21,4 +21,29 @@
         <!--是否反转-->
         <attr name="isReversal" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="SlideHorizontalView">
+        <!--主色-->
+        <attr name="x_main_color" format="color" />
+        <!--辅助色-->
+        <attr name="x_second_color" format="color" />
+        <!--文字颜色-->
+        <attr name="x_text_color" format="color" />
+        <!--显示数值-->
+        <attr name="x_show_number" format="boolean" />
+        <!--设置默认值-->
+        <attr name="x_default_value" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="SportsView">
+        <!--主色-->
+        <attr name="x_mainColor" format="color" />
+        <!--辅助色-->
+        <attr name="x_secondColor" format="color" />
+        <!--圆环开始度数-->
+        <attr name="x_angleStart" format="integer" />
+        <!--默认数值-->
+        <attr name="x_defaultValue" format="integer" />
+
+    </declare-styleable>
 </resources>

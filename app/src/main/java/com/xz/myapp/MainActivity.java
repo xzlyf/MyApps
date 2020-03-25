@@ -1,7 +1,6 @@
 package com.xz.myapp;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.Button;
 
 import com.xz.base.BaseActivity;
@@ -9,16 +8,10 @@ import com.xz.widget.XType;
 import com.xz.widget.dialog.XOnClickListener;
 import com.xz.widget.dialog.XzInputDialog;
 import com.xz.widget.dialog.XzTipsDialog;
-import com.xz.widget.entity.CommEntity;
-import com.xz.widget.recycler.XBanner;
 import com.xz.widget.toast.XToast;
 import com.xz.widget.widget.IpEditView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
@@ -111,7 +104,7 @@ public class MainActivity extends BaseActivity {
     }
     @OnClick(R.id.btn8)
     public void btn8() {
-        startActivity(new Intent(this, AnimActivity.class));
+        startActivity(new Intent(this, WidgetActivity.class));
     }
 
 

@@ -1,10 +1,6 @@
 package com.xz.myapp;
 
-import android.animation.ObjectAnimator;
-import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 
 import com.xz.base.BaseActivity;
@@ -12,9 +8,8 @@ import com.xz.widget.widget.SlideHorizontalView;
 import com.xz.widget.widget.SportsView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class AnimActivity extends BaseActivity implements View.OnClickListener {
+public class WidgetActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.sports_view)
     SportsView sportsView;
@@ -33,7 +28,7 @@ public class AnimActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public int getLayoutResource() {
-        return R.layout.activity_anim;
+        return R.layout.activity_widget;
     }
 
     @Override
