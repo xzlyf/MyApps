@@ -46,7 +46,7 @@
         <attr name="x_defaultValue" format="integer" />
     </declare-styleable>
 
-    <declare-styleable name="SinusoidView">
+    <declare-styleable name="BesselView">
         <!--两个波峰的距离-->
         <attr name="x_itemWaveLen" format="integer" />
         <!--波澜幅度-->

@@ -18,7 +18,7 @@ import com.xz.xzwidget.R;
  * @date 2020/3/26
  * 贝塞尔曲线 正弦曲线 模拟波浪运动效果
  */
-public class SinusoidView extends View {
+public class BesselView extends View {
 
     private int viewHeight = 300;
     private int viewWidth = 300;
@@ -37,27 +37,27 @@ public class SinusoidView extends View {
     /**
      * 构造函数会在new的时候调用
      */
-    public SinusoidView(Context context) {
+    public BesselView(Context context) {
         this(context, null);
     }
 
     /**
      * 在布局中使用
      */
-    public SinusoidView(Context context, AttributeSet attrs) {
+    public BesselView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
     /**
      * 布局layout中调用,但是会有style
      */
-    public SinusoidView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BesselView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.SinusoidView);
-        firstColor = array.getColor(R.styleable.SinusoidView_x_firstColor, Color.BLACK);
-        mItemWaveLength = array.getInt(R.styleable.SinusoidView_x_itemWaveLen, 300);
-        range = array.getInt(R.styleable.SinusoidView_x_range, 80);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.BesselView);
+        firstColor = array.getColor(R.styleable.BesselView_x_firstColor, Color.BLACK);
+        mItemWaveLength = array.getInt(R.styleable.BesselView_x_itemWaveLen, 300);
+        range = array.getInt(R.styleable.BesselView_x_range, 80);
 
         mPrint = new Paint();
         mPrint.setColor(firstColor);

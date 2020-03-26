@@ -22,7 +22,7 @@ import com.xz.xzwidget.R;
  * @author czr
  * @date 2020/3/24
  * <p>
- * 水平滑动组件
+ * 无极水平滑动组件
  */
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 public class SlideHorizontalView extends View {
