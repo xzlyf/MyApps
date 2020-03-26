@@ -1,9 +1,10 @@
-package com.xz.myapp;
+package com.xz.myapp.activity;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.xz.base.BaseActivity;
+import com.xz.myapp.R;
 import com.xz.utils.hardware.SystemInfoUtil;
 
 import butterknife.BindView;

@@ -1,9 +1,10 @@
-package com.xz.myapp;
+package com.xz.myapp.activity;
 
 import android.graphics.Color;
 import android.os.SystemClock;
 
 import com.xz.base.BaseActivity;
+import com.xz.myapp.R;
 import com.xz.ui.button.LoadingButton;
 
 import butterknife.BindView;

@@ -1,9 +1,10 @@
-package com.xz.myapp;
+package com.xz.myapp.activity;
 
 import android.view.View;
 import android.widget.Button;
 
 import com.xz.base.BaseActivity;
+import com.xz.myapp.R;
 import com.xz.ui.widget.BesselView;
 import com.xz.ui.widget.SlideHorizontalView;
 import com.xz.ui.widget.SportsView;

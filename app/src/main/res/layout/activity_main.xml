@@ -15,13 +15,6 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/title_logo"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="@dimen/dp_100"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:src="@drawable/logo" />
 
         <Button
             android:id="@+id/btn1"

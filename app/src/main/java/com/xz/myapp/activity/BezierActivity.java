@@ -1,10 +1,11 @@
-package com.xz.myapp;
+package com.xz.myapp.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.xz.base.BaseActivity;
+import com.xz.myapp.R;
 import com.xz.ui.button.XButton;
 import com.xz.ui.widget.BazierDemoView;
 

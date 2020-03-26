@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.widget.Button;
 
 import com.xz.base.BaseActivity;
+import com.xz.myapp.activity.BezierActivity;
+import com.xz.myapp.activity.ButtonActitvity;
+import com.xz.myapp.activity.SystemInfoActivity;
+import com.xz.myapp.activity.WidgetActivity;
 import com.xz.ui.XType;
 import com.xz.ui.dialog.XOnClickListener;
 import com.xz.ui.dialog.XzInputDialog;
