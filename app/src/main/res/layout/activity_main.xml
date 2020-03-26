@@ -1,73 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn1"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="加载对话框" />
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="提示对话框" />
+        <ImageView
+            android:id="@+id/title_logo"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:src="@drawable/logo" />
 
-    <Button
-        android:id="@+id/btn3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="输入对话框" />
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="加载对话框" />
 
-    <Button
-        android:id="@+id/btn4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="自定义Toast" />
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="提示对话框" />
 
-    <com.xz.ui.widget.IpEditView
-        android:id="@+id/ipAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="输入对话框" />
 
-    <Button
-        android:id="@+id/btn5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="获取IP地址文本" />
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="自定义Toast" />
 
+        <com.xz.ui.widget.IpEditView
+            android:id="@+id/ipAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/btn6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="常用按钮" />
-
-    <Button
-        android:id="@+id/btn7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="系统信息工具类" />
-
-    <Button
-        android:id="@+id/btn8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="小控件" />
-
-    <Button
-        android:id="@+id/btn9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="贝塞尔图形例子" />
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="获取IP地址文本" />
 
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="常用按钮" />
+
+        <Button
+            android:id="@+id/btn7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="系统信息工具类" />
+
+        <Button
+            android:id="@+id/btn8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="小控件" />
+
+        <Button
+            android:id="@+id/btn9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="贝塞尔图形例子" />
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>
