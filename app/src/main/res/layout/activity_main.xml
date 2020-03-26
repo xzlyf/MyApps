@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="自定义Toast" />
 
-    <com.xz.widget.widget.IpEditView
+    <com.xz.ui.widget.IpEditView
         android:id="@+id/ipAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

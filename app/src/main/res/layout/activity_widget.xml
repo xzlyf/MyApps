@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.xz.widget.widget.SportsView
+        <com.xz.ui.widget.SportsView
             android:id="@+id/sports_view"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_weight="1"
              />
 
-        <com.xz.widget.widget.SportsView
+        <com.xz.ui.widget.SportsView
             android:id="@+id/sports_view_2"
             android:layout_width="0dp"
             android:layout_height="150dp"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="简单属性动画" />
 
-    <com.xz.widget.widget.SlideHorizontalView
+    <com.xz.ui.widget.SlideHorizontalView
         android:id="@+id/slide_h"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

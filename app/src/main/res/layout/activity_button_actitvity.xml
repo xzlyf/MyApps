@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ButtonActitvity">
 
-    <com.xz.widget.button.XButton
+    <com.xz.ui.button.XButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -18,7 +18,7 @@
         app:buttonStrokeWidth="4"
         app:isFill="true" />
 
-    <com.xz.widget.button.XButton
+    <com.xz.ui.button.XButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -31,7 +31,7 @@
         app:isFill="false"
         app:whiceCirc="topLeft" />
 
-    <com.xz.widget.button.XButton
+    <com.xz.ui.button.XButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -44,7 +44,7 @@
         app:isFill="false"
         app:whiceCirc="topRight" />
 
-    <com.xz.widget.button.XButton
+    <com.xz.ui.button.XButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -58,7 +58,7 @@
         app:isReversal="true"
         app:whiceCirc="topLeft" />
 
-    <com.xz.widget.button.XButton
+    <com.xz.ui.button.XButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -72,7 +72,7 @@
         app:isReversal="true"
         app:whiceCirc="topRight" />
 
-    <com.xz.widget.button.LoadingButton
+    <com.xz.ui.button.LoadingButton
         android:id="@+id/load_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

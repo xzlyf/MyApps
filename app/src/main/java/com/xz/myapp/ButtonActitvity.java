@@ -4,7 +4,7 @@ import android.graphics.Color;
 import android.os.SystemClock;
 
 import com.xz.base.BaseActivity;
-import com.xz.widget.button.LoadingButton;
+import com.xz.ui.button.LoadingButton;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.widget.Button;
 
 import com.xz.base.BaseActivity;
-import com.xz.widget.XType;
-import com.xz.widget.dialog.XOnClickListener;
-import com.xz.widget.dialog.XzInputDialog;
-import com.xz.widget.dialog.XzTipsDialog;
-import com.xz.widget.toast.XToast;
-import com.xz.widget.widget.IpEditView;
+import com.xz.ui.XType;
+import com.xz.ui.dialog.XOnClickListener;
+import com.xz.ui.dialog.XzInputDialog;
+import com.xz.ui.dialog.XzTipsDialog;
+import com.xz.ui.toast.XToast;
+import com.xz.ui.widget.IpEditView;
 
 import butterknife.BindView;
 import butterknife.OnClick;

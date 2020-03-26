@@ -2,11 +2,10 @@ package com.xz.myapp;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.ScrollView;
 
 import com.xz.base.BaseActivity;
-import com.xz.widget.widget.SlideHorizontalView;
-import com.xz.widget.widget.SportsView;
+import com.xz.ui.widget.SlideHorizontalView;
+import com.xz.ui.widget.SportsView;
 
 import java.util.Random;
 

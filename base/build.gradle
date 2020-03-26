@@ -33,7 +33,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-    implementation project(path: ':widget')
+    implementation project(path: ':ui')
     //logger
     implementation 'com.orhanobut:logger:1.15'
     //butterknife

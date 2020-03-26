@@ -7,8 +7,6 @@ import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.xz.widget.dialog.XzInputDialog;
-
 public abstract class BaseDialog extends Dialog {
     private Context mContext;
     private OnCancelListener cancelListener;

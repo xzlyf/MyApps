@@ -12,7 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -22,9 +21,9 @@ import androidx.core.content.ContextCompat;
 
 import com.orhanobut.logger.Logger;
 import com.xz.base.utils.ToastUtil;
-import com.xz.widget.dialog.XOnClickListener;
-import com.xz.widget.dialog.XzLoadingDialog;
-import com.xz.widget.dialog.XzTipsDialog;
+import com.xz.ui.dialog.XOnClickListener;
+import com.xz.ui.dialog.XzLoadingDialog;
+import com.xz.ui.dialog.XzTipsDialog;
 
 import butterknife.ButterKnife;
 
