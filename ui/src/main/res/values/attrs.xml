@@ -44,6 +44,14 @@
         <attr name="x_angleStart" format="integer" />
         <!--默认数值-->
         <attr name="x_defaultValue" format="integer" />
+    </declare-styleable>
 
+    <declare-styleable name="SinusoidView">
+        <!--两个波峰的距离-->
+        <attr name="x_itemWaveLen" format="integer" />
+        <!--波澜幅度-->
+        <attr name="x_range" format="integer" />
+        <!--主色调-->
+        <attr name="x_firstColor" format="color" />
     </declare-styleable>
 </resources>

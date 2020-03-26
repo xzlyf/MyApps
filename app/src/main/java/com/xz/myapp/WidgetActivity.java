@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.xz.base.BaseActivity;
+import com.xz.ui.widget.SinusoidView;
 import com.xz.ui.widget.SlideHorizontalView;
 import com.xz.ui.widget.SportsView;
 
@@ -22,6 +23,8 @@ public class WidgetActivity extends BaseActivity implements View.OnClickListener
     Button btn1;
     @BindView(R.id.slide_h)
     SlideHorizontalView slideHorizontalView;
+    @BindView(R.id.sinusoid_view)
+    SinusoidView sinusoidView;
 
     private boolean isClick = false;
     private int randomNum;
@@ -48,6 +51,7 @@ public class WidgetActivity extends BaseActivity implements View.OnClickListener
                 sportsView2.setProgress(value);
             }
         });
+        sinusoidView.startAnim();
     }
 
     @Override
