@@ -15,18 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.api.TencentOpenActivity"></activity>
         <activity android:name=".activity.BezierActivity" />
         <activity android:name=".activity.WidgetActivity" />
         <activity android:name=".activity.SystemInfoActivity" />
         <activity android:name=".activity.ButtonActitvity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".StartActivity" android:theme="@style/FullScreenTheme">
+        <activity
+            android:name=".StartActivity"
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

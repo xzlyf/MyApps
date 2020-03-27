@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * 生成随机字符串
  */
-public class RandomString {
+public class RandomUtil {
     /**
      * 返回指定长度的随机字符串
      * @param length
