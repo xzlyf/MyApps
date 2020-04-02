@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.api.TencentOpenActivity"></activity>
+        <activity android:name=".activity.WebViewActivity"></activity>
+        <activity android:name=".activity.api.TencentOpenActivity" />
         <activity android:name=".activity.BezierActivity" />
         <activity android:name=".activity.WidgetActivity" />
         <activity android:name=".activity.SystemInfoActivity" />
