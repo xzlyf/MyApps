@@ -55,7 +55,7 @@ public class TencentOpenActivity extends BaseActivity {
             Logger.d("存储文件夹创建成功");
         }
         //getTTs("你好，世界");
-        //getTextChat("你是谁");
+        //getTextChat("在干嘛");
     }
 
 

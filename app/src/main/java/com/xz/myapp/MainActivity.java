@@ -8,6 +8,7 @@ import com.xz.myapp.activity.BezierActivity;
 import com.xz.myapp.activity.ButtonActitvity;
 import com.xz.myapp.activity.SystemInfoActivity;
 import com.xz.myapp.activity.WebViewActivity;
+import com.xz.myapp.activity.api.MoreApiActivity;
 import com.xz.myapp.activity.api.TencentOpenActivity;
 import com.xz.myapp.activity.WidgetActivity;
 import com.xz.ui.XType;
@@ -46,6 +47,8 @@ public class MainActivity extends BaseActivity {
     Button btn10;
     @BindView(R.id.btn11)
     Button btn11;
+    @BindView(R.id.btn12)
+    Button btn12;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -132,6 +135,10 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.btn11)
     public void btn11() {
         startActivity(new Intent(this, WebViewActivity.class));
+    }
+    @OnClick(R.id.btn12)
+    public void btn12() {
+        startActivity(new Intent(this, MoreApiActivity.class));
     }
 
 

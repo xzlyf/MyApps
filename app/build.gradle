@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.xz.myapp"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -50,5 +50,14 @@ dependencies {
     implementation project(path: ':ui')
     implementation project(path: ':base')
     implementation project(path: ':utils')
+
+    //高斯模糊控件
+    implementation 'io.alterac.blurkit:blurkit:1.1.0'
+
+    //上拉面板
+    repositories {
+        mavenCentral()
+    }
+    implementation 'com.sothree.slidinguppanel:library:3.4.0'
 
 }
