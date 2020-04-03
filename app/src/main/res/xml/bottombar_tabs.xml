@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+
+    <!--图标大小使用24dp刚刚合适-->
+    <tab
+        icon="@drawable/icon_home"
+        id="@+id/tab_home"
+        title="主页" />
+    <tab
+        icon="@drawable/icon_content"
+        id="@+id/tab_content"
+        title="内容" />
+    <tab
+        icon="@drawable/icon_setting"
+        id="@+id/tab_setting"
+        title="设置" />
+</tabs>

@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 /**
  * SP工具类
  */
-public class SharedPreferencesUtil {
+public class PreferencesUtil {
 
     /*
     apply() 异步提交

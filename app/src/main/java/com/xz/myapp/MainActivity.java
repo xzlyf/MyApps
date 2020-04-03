@@ -1,31 +1,26 @@
 package com.xz.myapp;
 
-import android.os.Bundle;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 import com.xz.base.BaseActivity;
-import com.xz.myapp.activity.BezierActivity;
-import com.xz.myapp.activity.ButtonActitvity;
-import com.xz.myapp.activity.SystemInfoActivity;
-import com.xz.myapp.activity.WebViewActivity;
-import com.xz.myapp.activity.WidgetActivity;
-import com.xz.myapp.activity.api.MoreApiActivity;
-import com.xz.myapp.activity.api.TencentOpenActivity;
-import com.xz.myapp.adapter.ClassAdapter;
-import com.xz.myapp.entity.ClassEntity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.xz.myapp.activity.fragment.ContentFragment;
+import com.xz.myapp.activity.fragment.HomeFragment;
+import com.xz.myapp.activity.fragment.SettingFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
-    @BindView(R.id.recycler)
-    RecyclerView recycler;
+    @BindView(R.id.bottomBar)
+    BottomBar bottomBar;
+
+    private HomeFragment homeFragment;
+    private ContentFragment contentFragment;
+    private SettingFragment settingFragment;
+    private Fragment currentFragment = new Fragment();
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -39,21 +34,60 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        initFragment();
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(int tabId) {
+                switch (tabId) {
+                    case R.id.tab_home:
+                        switchFragment(homeFragment).commit();
+                        break;
+                    case R.id.tab_content:
+                        switchFragment(contentFragment).commit();
+                        break;
+                    case R.id.tab_setting:
+                        switchFragment(settingFragment).commit();
 
+                        break;
+                }
 
-        List<ClassEntity> list = new ArrayList<>();
-        list.add(new ClassEntity("自定义控件", WidgetActivity.class));
-        list.add(new ClassEntity("按钮大全", ButtonActitvity.class));
-        list.add(new ClassEntity("WebView开发", WebViewActivity.class));
-        list.add(new ClassEntity("贝塞尔图形例子", BezierActivity.class));
-        list.add(new ClassEntity("腾讯开发平台", TencentOpenActivity.class));
-        list.add(new ClassEntity("优秀开源框架", MoreApiActivity.class));
-        list.add(new ClassEntity("系统信息", SystemInfoActivity.class));
-        ClassAdapter adapter = new ClassAdapter(mContext);
-        recycler.setLayoutManager(new LinearLayoutManager(mContext));
-        recycler.setAdapter(adapter);
-        adapter.refresh(list);
+            }
+        });
 
     }
 
+
+    private void initFragment() {
+        homeFragment = new HomeFragment();
+        contentFragment = new ContentFragment();
+        settingFragment = new SettingFragment();
+
+    }
+
+
+    /**
+     * 切换fragment
+     *
+     * @param targetFragment
+     * @return
+     */
+    private FragmentTransaction switchFragment(Fragment targetFragment) {
+
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+        if (!targetFragment.isAdded()) {
+            //第一次使用switchFragment()时currentFragment为null，所以要判断一下
+            if (currentFragment != null) {
+                transaction.hide(currentFragment);
+            }
+            transaction.add(R.id.fragment, targetFragment, targetFragment.getClass().getName());
+
+        } else {
+            transaction
+                    .hide(currentFragment)
+                    .show(targetFragment);
+        }
+        currentFragment = targetFragment;
+        return transaction;
+    }
 }

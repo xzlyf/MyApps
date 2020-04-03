@@ -60,4 +60,7 @@ dependencies {
     }
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
 
+    //底部导航栏
+    implementation 'com.roughike:bottom-bar:2.3.1'
+
 }

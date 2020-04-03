@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.orhanobut.logger.Logger;
+import com.xz.utils.PreferencesUtilV2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +18,16 @@ public class BaseApplication extends Application {
         super.onCreate();
         instance = this;
         initLog();
+        //初始prefercences工具
+        PreferencesUtilV2.initPreferencesUtils(this, "my_app");
     }
-
-
 
     private void initLog() {
         Logger.init("xzlyf")    //LOG TAG默认是PRETTYLOGGER
                 .methodCount(2)                 // 决定打印多少行（每一行代表一个方法）默认：2
                 .methodOffset(0);             // 默认：0
     }
+
 
     public static BaseApplication getInstance() {
         return instance;
@@ -75,4 +77,6 @@ public class BaseApplication extends Application {
             }
         }
     }
+
+
 }

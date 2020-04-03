@@ -34,6 +34,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     implementation project(path: ':ui')
+    implementation project(path: ':utils')
+
     //logger
     implementation 'com.orhanobut:logger:1.15'
     //butterknife
