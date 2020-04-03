@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+
+    <!--两种涟漪效果-->
+    <!--android:background="?android:attr/selectableItemBackgroundBorderless"-->
+    <!--android:background="?android:attr/selectableItemBackground"-->
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:padding="@dimen/dp_15"
+        android:text="名称"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp" />
+
+</androidx.cardview.widget.CardView>
