@@ -17,15 +17,16 @@
             android:layout_height="35dp"
             android:src="@drawable/icon_type_1" />
 
-        <TextView
-            android:id="@+id/tv_msg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="18dp"
-            android:text="This is test.Arrow,This is test!!!This is test.Arrow,This is test!!!This is test.Arrow,This is test!!!This is test.Arrow,This is test!!!This is test.Arrow,This is test!!!"
-            android:textColor="@color/mainTextColor"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tv_msg"
+                android:maxLines="12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="18dp"
+                android:text="This is test.Arrow,This is test!!!This is test.Arrow,This is test!!!This is test.Arrow,This is test!!!This is test.Arrow,This is test!!!This is test.Arrow,This is test!!!"
+                android:textColor="@color/mainTextColor"
+                android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,6 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DENY"
+            android:clickable="true"
+            android:focusable="true"
             android:textColor="@color/defaultMainColor" />
 
         <!--积极的按钮-->
@@ -49,6 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:text="ALLOW"
+            android:clickable="true"
+            android:focusable="true"
             android:textColor="@color/defaultMainColor" />
     </LinearLayout>
 </LinearLayout>

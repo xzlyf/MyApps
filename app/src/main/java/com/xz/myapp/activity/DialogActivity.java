@@ -32,7 +32,14 @@ public class DialogActivity extends BaseActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IconDialog dialog = new IconDialog.Builder(mContext).create();
+                IconDialog dialog = new IconDialog.Builder(mContext)
+                        .setIcon(IconDialog.TYPE_ICON_BUG)
+                        .setContent("云母屏风烛影深，长河渐落晓星沉。\n" +
+                                "嫦娥应悔偷灵药，碧海青天夜夜心。云母屏风烛影深，长河渐落晓星沉。\n" +
+                                "嫦娥应悔偷灵药，碧海青天夜夜心。云母屏风烛影深，长河渐落晓星沉。\n" +
+                                "嫦娥应悔偷灵药，碧海青天夜夜心。" +
+                                "云母屏风烛影深，长河渐落晓星沉。")
+                        .create();
                 dialog.show();
             }
         });

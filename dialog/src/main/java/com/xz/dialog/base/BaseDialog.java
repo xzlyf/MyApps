@@ -16,7 +16,7 @@ import com.xz.dialog.R;
  * @date 2020/4/7
  */
 public abstract class BaseDialog extends Dialog {
-    private Context mContext;
+    protected Context mContext;
 
     public BaseDialog(Context context) {
         this(context, R.style.customDialog);
