@@ -7,12 +7,14 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +22,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.orhanobut.logger.Logger;
+import com.xz.base.utils.ThreadUtil;
 import com.xz.base.utils.ToastUtil;
-import com.xz.ui.dialog.XOnClickListener;
-import com.xz.ui.dialog.XzLoadingDialog;
-import com.xz.ui.dialog.XzTipsDialog;
 
 import butterknife.ButterKnife;
 
@@ -31,8 +31,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected final String TAG = this.getClass().getSimpleName();
 
     protected Activity mContext;
-    private XzLoadingDialog xzLoadingDialog;
-    private XzTipsDialog xzTipsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +108,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                             .create();
 
                     dialog.show();
-                }else {
+                } else {
                     initData();
                 }
 
@@ -162,27 +160,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void showLoading(String text) {
-        if (xzLoadingDialog == null) {
-            xzLoadingDialog = new XzLoadingDialog.Builder(this)
-                    .setCancelEnable(true)
-                    .setCancelText(text)
-                    .setCancelOnClickListener(new XOnClickListener() {
-                        @Override
-                        public void onClick(int viewId, String s, int position) {
 
-                        }
-                    })
-                    .create();
-        }
-
-        xzLoadingDialog.show();
     }
 
     @Override
     public void disLoading() {
-        if (xzLoadingDialog != null) {
-            xzLoadingDialog.dismiss();
-        }
+
     }
 
     @Override
@@ -197,29 +180,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void sDialog(String title, String msg) {
-        if (xzTipsDialog == null) {
-            xzTipsDialog = new XzTipsDialog.Builder(this)
-                    .setTitle(title)
-                    .setContent(msg)
-                    .setCancelOnclickListener("好的", new XOnClickListener() {
-                        @Override
-                        public void onClick(int viewId, String s, int position) {
-                            dDialog();
-                        }
-                    })
-                    .create();
-            xzTipsDialog.setCancelable(false);
-            xzTipsDialog.setCanceledOnTouchOutside(false);
-        }
-        xzTipsDialog.show();
+
     }
 
     @Override
     public void dDialog() {
-        if (xzTipsDialog != null || xzTipsDialog.isShowing()) {
-            xzTipsDialog.dismiss();
-            xzTipsDialog = null;
-        }
+
     }
 
     /**

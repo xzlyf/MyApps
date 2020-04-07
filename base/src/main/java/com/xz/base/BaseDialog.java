@@ -2,6 +2,7 @@ package com.xz.base;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
@@ -35,7 +36,7 @@ public abstract class BaseDialog extends Dialog {
         setContentView(getLayoutResource());
         Window window = getWindow();
         assert window != null;
-        window.setBackgroundDrawableResource(com.xz.xzwidget.R.color.transparent);
+        window.setBackgroundDrawableResource(Color.TRANSPARENT);
         WindowManager.LayoutParams lp = window.getAttributes();
         DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
         lp.width = (int) (dm.widthPixels * 0.8);

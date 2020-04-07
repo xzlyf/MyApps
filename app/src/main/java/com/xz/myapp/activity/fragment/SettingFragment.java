@@ -22,6 +22,7 @@ import butterknife.BindView;
  */
 public class SettingFragment extends BaseFragment {
     private Button appMode;
+    private boolean isNight;//是否夜间模式
 
     @Override
     protected int getLayout() {
@@ -36,8 +37,16 @@ public class SettingFragment extends BaseFragment {
     @Override
     protected void initDate(Context mContext) {
 
-        boolean isNight = PreferencesUtilV2.getBoolean(Local.SWITCH_MODE_KEY, false);
-        //switchMode(isNight);
+        isNight = PreferencesUtilV2.getBoolean(Local.SWITCH_MODE_KEY, false);
+        switchMode(isNight);
+
+        appMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isNight = !isNight;
+                switchMode(isNight);
+            }
+        });
     }
 
 
@@ -49,15 +58,13 @@ public class SettingFragment extends BaseFragment {
     private void switchMode(boolean isNight) {
         if (isNight) {
             //当前暗色模式
-            PreferencesUtilV2.putBoolean(Local.SWITCH_MODE_KEY, false);
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             appMode.setText("亮色模式");
         } else {
             //当前亮色模式
-            PreferencesUtilV2.putBoolean(Local.SWITCH_MODE_KEY, true);
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             appMode.setText("夜间模式");
-
         }
+        PreferencesUtilV2.putBoolean(Local.SWITCH_MODE_KEY, isNight);
     }
 }
