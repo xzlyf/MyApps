@@ -50,6 +50,7 @@ dependencies {
     implementation project(path: ':ui')
     implementation project(path: ':base')
     implementation project(path: ':utils')
+    implementation project(path: ':dialog')
 
     //高斯模糊控件
     implementation 'io.alterac.blurkit:blurkit:1.1.0'

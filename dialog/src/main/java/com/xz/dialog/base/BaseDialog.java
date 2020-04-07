@@ -1,33 +1,30 @@
-package com.xz.base;
+package com.xz.dialog.base;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.xz.dialog.R;
+
+/**
+ * @author czr
+ * @date 2020/4/7
+ */
 public abstract class BaseDialog extends Dialog {
     private Context mContext;
-    private OnCancelListener cancelListener;
 
     public BaseDialog(Context context) {
-        this(context, 0);
+        this(context, R.style.customDialog);
     }
 
-    public BaseDialog(Context context, int themeResId) {
-        this(context, false, null);
-    }
-
-    public BaseDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
-        super(context, cancelable, cancelListener);
-        if (cancelListener != null) {
-            this.cancelListener = cancelListener;
-        }
-
+    private BaseDialog(Context context, int themeResId) {
+        super(context, themeResId);
         mContext = context;
-
     }
 
     @Override
@@ -36,14 +33,14 @@ public abstract class BaseDialog extends Dialog {
         setContentView(getLayoutResource());
         Window window = getWindow();
         assert window != null;
-        window.setBackgroundDrawableResource(R.color.TRANSPARENT);
         WindowManager.LayoutParams lp = window.getAttributes();
         DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
-        lp.width = (int) (dm.widthPixels * 0.8);
-        lp.dimAmount = 0.2f;
+        lp.width = (int) (dm.widthPixels * 0.8);//宽度始终是屏幕的80%
+        lp.dimAmount = 0.2f;//背景暗度
         window.setAttributes(lp);
-
+        initView();
         initData();
+
     }
 
 
@@ -55,8 +52,14 @@ public abstract class BaseDialog extends Dialog {
     protected abstract int getLayoutResource();
 
     /**
+     * 控件初始化
+     */
+    protected abstract void initView();
+
+    /**
      * 数据初始化
      */
     protected abstract void initData();
+
 
 }

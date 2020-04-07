@@ -1,20 +1,15 @@
 package com.xz.myapp.activity.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.orhanobut.logger.Logger;
-import com.xz.base.BaseApplication;
 import com.xz.base.BaseFragment;
+import com.xz.base.utils.PreferencesUtilV2;
 import com.xz.myapp.R;
 import com.xz.myapp.constant.Local;
-import com.xz.utils.PreferencesUtilV2;
-
-import butterknife.BindView;
 
 /**
  * @author czr

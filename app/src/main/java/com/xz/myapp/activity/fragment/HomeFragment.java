@@ -11,6 +11,7 @@ import com.xz.base.BaseFragment;
 import com.xz.myapp.R;
 import com.xz.myapp.activity.BezierActivity;
 import com.xz.myapp.activity.ButtonActitvity;
+import com.xz.myapp.activity.DialogActivity;
 import com.xz.myapp.activity.SystemInfoActivity;
 import com.xz.myapp.activity.WebViewActivity;
 import com.xz.myapp.activity.WidgetActivity;
@@ -42,6 +43,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initDate(Context mContext) {
         List<ClassEntity> list = new ArrayList<>();
+        list.add(new ClassEntity("对话框", DialogActivity.class));
         list.add(new ClassEntity("自定义控件", WidgetActivity.class));
         list.add(new ClassEntity("按钮大全", ButtonActitvity.class));
         list.add(new ClassEntity("WebView开发", WebViewActivity.class));
