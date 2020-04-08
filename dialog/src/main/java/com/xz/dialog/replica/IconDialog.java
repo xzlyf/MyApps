@@ -1,12 +1,11 @@
 package com.xz.dialog.replica;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.MotionEvent;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.xz.dialog.R;
 import com.xz.dialog.base.BaseDialog;
@@ -38,13 +37,33 @@ public class IconDialog extends BaseDialog implements View.OnClickListener {
     /**
      * 图表样式结束========================================
      */
+    /**
+     * 背景样式开始========================================
+     */
+    public static int BG_ANGLE_NONE = R.drawable.bg_angle_none;
+    public static int BG_ANGLE_5 = R.drawable.bg_angle_5;
+    public static int BG_ANGLE_8 = R.drawable.bg_angle_8;
+    public static int BG_ANGLE_10 = R.drawable.bg_angle_10;
+    public static int BG_ANGLE_15 = R.drawable.bg_angle_15;
+    public static int BG_ANGLE_20 = R.drawable.bg_angle_20;
+    public static int BG_ANGLE_25 = R.drawable.bg_angle_25;
+    public static int BG_ANGLE_30 = R.drawable.bg_angle_30;
+    public static int BG_ANGLE_35 = R.drawable.bg_angle_35;
+    /**
+     * 背景样式结束========================================
+     */
+
+    private int backgroundDrawableRes;//背景样式
     private int mainColor;//主色调
     private int type;//图标类型
     private String content;//内容
     private NegativeOnClickListener negativeOnClickListener;//消极的点击
     private PositiveOnClickListener positiveOnClickListener;//积极的点击
+    private CharSequence negativeName;//按钮名称
+    private CharSequence positiveName;
 
 
+    private LinearLayout rootView;
     private ImageView iconType;
     private TextView tvMsg;
     private TextView tvNegative;
@@ -65,6 +84,7 @@ public class IconDialog extends BaseDialog implements View.OnClickListener {
         tvMsg = findViewById(R.id.tv_msg);
         tvNegative = findViewById(R.id.tv_negative);
         tvPositive = findViewById(R.id.tv_positive);
+        rootView = findViewById(R.id.root_layout);
 
     }
 
@@ -74,6 +94,9 @@ public class IconDialog extends BaseDialog implements View.OnClickListener {
         mainColor = mContext.getResources().getColor(R.color.defaultMainColor);
         type = TYPE_ICON_TIPS;
         content = "This is Test content,you can use \"setText()\" to replace!";
+        negativeName = "DENY";
+        positiveName = "ALLOW";
+        backgroundDrawableRes = BG_ANGLE_NONE;
     }
 
     @Override
@@ -86,16 +109,17 @@ public class IconDialog extends BaseDialog implements View.OnClickListener {
      * 刷新视图
      */
     private void refreshView() {
+        rootView.setBackground(mContext.getDrawable(backgroundDrawableRes));
         iconType.setColorFilter(mainColor);
         tvNegative.setTextColor(mainColor);
         tvPositive.setTextColor(mainColor);
+        tvNegative.setText(negativeName);
+        tvPositive.setText(positiveName);
 
         iconType.setImageResource(type);
         tvMsg.setText(content);
         tvNegative.setOnClickListener(this);
         tvPositive.setOnClickListener(this);
-        tvNegative.setOnTouchListener(onTouchListener);
-        tvPositive.setOnTouchListener(onTouchListener);
     }
 
     @Override
@@ -109,25 +133,8 @@ public class IconDialog extends BaseDialog implements View.OnClickListener {
                 positiveOnClickListener.OnClick(v);
         }
 
+        dismiss();
     }
-
-    private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.animate().scaleX(0.9f);
-                    v.animate().scaleY(0.9f);
-                    break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    v.animate().scaleX(1f);
-                    v.animate().scaleY(1f);
-                    break;
-            }
-            return false;
-        }
-    };
 
 
     public static class Builder {
@@ -157,6 +164,56 @@ public class IconDialog extends BaseDialog implements View.OnClickListener {
          */
         public Builder setIcon(int type) {
             dialog.type = type;
+            return this;
+        }
+
+        /**
+         * 设置主色调
+         *
+         * @param color
+         * @return
+         */
+        public Builder setMainColor(int color) {
+            dialog.mainColor = color;
+            return this;
+        }
+
+
+        /**
+         * 设置圆角角度
+         * 默认NONE
+         *
+         * @param drawableRes 可以自定义指定drawable资源文件，也可以使用自带的
+         * @return
+         */
+        public Builder setAngle(int drawableRes) {
+            dialog.backgroundDrawableRes = drawableRes;
+            return this;
+        }
+
+        /**
+         * negative按钮监听
+         *
+         * @param name     按钮名称
+         * @param listener 监听
+         * @return
+         */
+        public Builder setNegativeOnClickListener(CharSequence name, NegativeOnClickListener listener) {
+            dialog.negativeName = name;
+            dialog.negativeOnClickListener = listener;
+            return this;
+        }
+
+        /**
+         * positive按钮监听
+         *
+         * @param name     按钮名称
+         * @param listener 监听
+         * @return
+         */
+        public Builder setPositiveOnClickListener(CharSequence name, PositiveOnClickListener listener) {
+            dialog.positiveName = name;
+            dialog.positiveOnClickListener = listener;
             return this;
         }
 

@@ -11,6 +11,6 @@
         android:id="@+id/btn_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="仿原生对话框" />
+        android:text="图标对话框" />
 
 </LinearLayout>
