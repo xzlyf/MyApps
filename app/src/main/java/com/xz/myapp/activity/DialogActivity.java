@@ -1,26 +1,26 @@
 package com.xz.myapp.activity;
 
-import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.xz.base.BaseActivity;
+import com.xz.dialog.constant.DialogStyle;
 import com.xz.dialog.event.NegativeOnClickListener;
 import com.xz.dialog.event.PositiveOnClickListener;
-import com.xz.dialog.replica.IconDialog;
-import com.xz.dialog.replica.TestDialog;
+import com.xz.dialog.imitate.AppleDialog;
+import com.xz.dialog.imitate.IconDialog;
 import com.xz.myapp.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class DialogActivity extends BaseActivity {
 
 
     @BindView(R.id.btn_1)
     Button btn1;
+    @BindView(R.id.btn_2)
+    Button btn2;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -38,8 +38,8 @@ public class DialogActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 IconDialog dialog = new IconDialog.Builder(mContext)
-                        .setIcon(IconDialog.TYPE_ICON_BUG)
-                        .setAngle(IconDialog.BG_ANGLE_8)
+                        .setIcon(DialogStyle.TYPE_ICON_BUG)
+                        .setAngle(DialogStyle.BG_ANGLE_8)
                         .setMainColor(getResources().getColor(R.color.defaultMainColor))
                         .setContent("云母屏风烛影深，长河渐落晓星沉。\n" +
                                 "嫦娥应悔偷灵药，碧海青天夜夜心。云母屏风烛影深，长河渐落晓星沉。\n" +
@@ -57,6 +57,30 @@ public class DialogActivity extends BaseActivity {
                             }
                         })
                         .create();
+                dialog.show();
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppleDialog dialog = new AppleDialog.Builder(mContext)
+                        .setTitle("警告")
+                        .setNegativeOnClickListener("取消", new NegativeOnClickListener() {
+                            @Override
+                            public void OnClick(View v) {
+
+                            }
+                        })
+                        .setPositiveOnClickListener("确定", new PositiveOnClickListener() {
+                            @Override
+                            public void OnClick(View v) {
+
+                            }
+                        })
+                        .setContent("你的手机电量过低，请保存数据")
+                        .create();
+
                 dialog.show();
             }
         });
