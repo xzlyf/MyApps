@@ -7,9 +7,11 @@ import android.widget.Toast;
 import com.xz.base.BaseActivity;
 import com.xz.dialog.constant.DialogStyle;
 import com.xz.dialog.event.NegativeOnClickListener;
+import com.xz.dialog.event.OnItemClickListener;
 import com.xz.dialog.event.PositiveOnClickListener;
 import com.xz.dialog.imitate.AppleDialog;
 import com.xz.dialog.imitate.AppleInputDialog;
+import com.xz.dialog.imitate.AppleListDialog;
 import com.xz.dialog.imitate.IconDialog;
 import com.xz.myapp.R;
 
@@ -24,6 +26,8 @@ public class DialogActivity extends BaseActivity {
     Button btn2;
     @BindView(R.id.btn_3)
     Button btn3;
+    @BindView(R.id.btn_4)
+    Button btn4;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -115,6 +119,27 @@ public class DialogActivity extends BaseActivity {
 
             }
         });
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AppleListDialog dialog = new AppleListDialog.Builder(mContext)
+                        .setTitle("打分")
+                        .setContent("给个好评呗")
+                        .setItem(new String[]{"好评", "特好评", "超级好评"}, new OnItemClickListener<String[]>() {
+                            @Override
+                            public void OnClick(String[] data, int position) {
+                                sToast("点击了：" + data[position]);
+                            }
+                        })
+                        .create();
+
+                dialog.show();
+
+            }
+        });
+
 
     }
 

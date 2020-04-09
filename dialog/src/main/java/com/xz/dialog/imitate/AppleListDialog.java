@@ -3,12 +3,16 @@ package com.xz.dialog.imitate;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.xz.dialog.R;
 import com.xz.dialog.base.BaseDialog;
 import com.xz.dialog.event.NegativeOnClickListener;
+import com.xz.dialog.event.OnItemClickListener;
 import com.xz.dialog.event.PositiveOnClickListener;
 
 /**
@@ -19,10 +23,13 @@ import com.xz.dialog.event.PositiveOnClickListener;
 public class AppleListDialog extends BaseDialog {
 
     private String title, content;//标题和类容
-    private String negativeName, positiveName;//标题和类容
+    private String[] items;
+    private ArrayAdapter<String> adapter;
+    private OnItemClickListener<String[]> mListener;
 
     private TextView tvTitle;
     private TextView tvContent;
+    private ListView listView;
 
     public AppleListDialog(Context context) {
         super(context);
@@ -38,6 +45,7 @@ public class AppleListDialog extends BaseDialog {
 
         tvTitle = findViewById(R.id.tv_title);
         tvContent = findViewById(R.id.tv_content);
+        listView = findViewById(R.id.item_list);
     }
 
     @Override
@@ -48,9 +56,10 @@ public class AppleListDialog extends BaseDialog {
         tvContent.setTypeface(typeface);
 
         title = "示例";
-        content = "Hello world!";
-        negativeName = "取消";
-        positiveName = "确定";
+        content = "是否为我打分~";
+        items = new String[]{"好评", "超好评", "无敌好评"};
+
+
     }
 
 
@@ -65,19 +74,24 @@ public class AppleListDialog extends BaseDialog {
      */
     private void refreshView() {
         tvTitle.setText(title);
-        tvContent.setText(content);
+        if (content.equals("")) {
+            tvContent.setVisibility(View.GONE);
+        } else {
+            tvContent.setText(content);
+        }
+        adapter = new ArrayAdapter<>(mContext, R.layout.item_ios, R.id.text1, items);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (mListener != null)
+                    mListener.OnClick(items, position);
+                dismiss();
 
-
+            }
+        });
     }
 
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            int id = v.getId();
-            dismiss();
-
-        }
-    };
 
     public static class Builder {
         AppleListDialog dialog;
@@ -106,6 +120,18 @@ public class AppleListDialog extends BaseDialog {
          */
         public Builder setContent(String content) {
             dialog.content = content;
+            return this;
+        }
+
+        /**
+         * 设置列表
+         *
+         * @param item
+         * @return
+         */
+        public Builder setItem(String[] item, OnItemClickListener<String[]> listener) {
+            dialog.items = item;
+            dialog.mListener = listener;
             return this;
         }
 

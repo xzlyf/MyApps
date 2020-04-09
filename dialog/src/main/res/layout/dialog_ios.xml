@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
             android:lines="1"
             android:textColor="@color/ios_black"
@@ -42,7 +42,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.75dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:background="@color/ios_gray" />
 
         <LinearLayout
