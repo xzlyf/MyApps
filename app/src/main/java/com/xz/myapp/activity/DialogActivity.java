@@ -9,6 +9,7 @@ import com.xz.dialog.constant.DialogStyle;
 import com.xz.dialog.event.NegativeOnClickListener;
 import com.xz.dialog.event.PositiveOnClickListener;
 import com.xz.dialog.imitate.AppleDialog;
+import com.xz.dialog.imitate.AppleInputDialog;
 import com.xz.dialog.imitate.IconDialog;
 import com.xz.myapp.R;
 
@@ -21,6 +22,8 @@ public class DialogActivity extends BaseActivity {
     Button btn1;
     @BindView(R.id.btn_2)
     Button btn2;
+    @BindView(R.id.btn_3)
+    Button btn3;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -85,6 +88,33 @@ public class DialogActivity extends BaseActivity {
             }
         });
 
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AppleInputDialog dialog = new AppleInputDialog.Builder(mContext)
+                        .setTitle("密码输入")
+                        .setContent("请输入'666666@qq.com'\nAppleID密码")
+                        .setInputLines(1)
+                        .setHint("密码")
+                        .setPositiveOnClickListener("确定", new PositiveOnClickListener() {
+                            @Override
+                            public void OnClick(View v) {
+
+                            }
+                        })
+                        .setNegativeOnClickListener("取消", new NegativeOnClickListener() {
+                            @Override
+                            public void OnClick(View v) {
+
+                            }
+                        })
+                        .create();
+
+                dialog.show();
+
+            }
+        });
 
     }
 

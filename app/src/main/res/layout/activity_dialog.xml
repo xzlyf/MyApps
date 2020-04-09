@@ -12,10 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="图标对话框" />
+
     <Button
         android:id="@+id/btn_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="IOS对话框" />
+
+    <Button
+        android:id="@+id/btn_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IOS输入框" />
 
 </LinearLayout>
