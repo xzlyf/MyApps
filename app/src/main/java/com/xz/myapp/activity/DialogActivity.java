@@ -13,6 +13,7 @@ import com.xz.dialog.imitate.AppleDialog;
 import com.xz.dialog.imitate.AppleInputDialog;
 import com.xz.dialog.imitate.AppleListDialog;
 import com.xz.dialog.imitate.IconDialog;
+import com.xz.dialog.imitate.UpdateDialog;
 import com.xz.myapp.R;
 
 import butterknife.BindView;
@@ -28,6 +29,8 @@ public class DialogActivity extends BaseActivity {
     Button btn3;
     @BindView(R.id.btn_4)
     Button btn4;
+    @BindView(R.id.btn_5)
+    Button btn5;
 
     @Override
     public boolean homeAsUpEnabled() {
@@ -135,6 +138,17 @@ public class DialogActivity extends BaseActivity {
                         })
                         .create();
 
+                dialog.show();
+
+            }
+        });
+
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                UpdateDialog dialog = new UpdateDialog.Builder(mContext)
+                        .create();
                 dialog.show();
 
             }

@@ -31,4 +31,10 @@
         android:layout_height="wrap_content"
         android:text="IOS列表提示框" />
 
+    <Button
+        android:id="@+id/btn_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="通用升级对话框" />
+
 </LinearLayout>
