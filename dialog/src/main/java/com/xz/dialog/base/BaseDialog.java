@@ -2,12 +2,14 @@ package com.xz.dialog.base;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.xz.dialog.R;
+import com.xz.dialog.utils.SystemUtils;
 
 /**
  * @author czr
@@ -34,12 +36,29 @@ public abstract class BaseDialog extends Dialog {
         assert window != null;
         WindowManager.LayoutParams lp = window.getAttributes();
         DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
-        lp.width = (int) (dm.widthPixels * widthP);//宽度始终是屏幕的80%
+        //判断是平板模式还是手机模式
+        if (SystemUtils.isPad(mContext)) {
+            //1/3屏幕宽度
+            lp.width = (int) (dm.widthPixels * 0.4);
+            lp.height = (int) (dm.heightPixels * 0.6);
+
+        } else {
+            //判断当前是横屏模式还是竖屏模式
+            if (SystemUtils.scrennMode(mContext) == Configuration.ORIENTATION_LANDSCAPE) {
+
+                lp.width = (int) (dm.widthPixels * 0.4);
+                lp.height = (int) (dm.heightPixels * 0.8);
+            } else {
+                //宽度始终是屏幕的80%
+                lp.width = (int) (dm.widthPixels * widthP);
+            }
+
+        }
+
         lp.dimAmount = dim;//背景暗度
         window.setAttributes(lp);
         initView();
         initData();
-
     }
 
 

@@ -1,5 +1,8 @@
 package com.xz.myapp.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,6 +17,7 @@ import com.xz.dialog.imitate.AppleInputDialog;
 import com.xz.dialog.imitate.AppleListDialog;
 import com.xz.dialog.imitate.IconDialog;
 import com.xz.dialog.imitate.UpdateDialog;
+import com.xz.dialog.utils.DownloadTools;
 import com.xz.myapp.R;
 
 import butterknife.BindView;
@@ -147,7 +151,39 @@ public class DialogActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(mContext, "存储权限未获取", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                String url = "https://cn.bing.com/th?id=OHR.SpiritSiblings_EN-CN1295893854_1920x1080.jpg&rf=LaDigue_1920x1080.jpg";
+                String path = mContext.getExternalFilesDir("update").getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg";
                 UpdateDialog dialog = new UpdateDialog.Builder(mContext)
+                        .setVersionName("v1.0.0")
+                        .setContent("1.新的模组加入\n2.自定义控件漏洞修复\n3.腾讯Api接口接入\n4.界面美化设计\n5.修复某个致命漏洞\n6.加入苹果风对话框")
+                        .setDownload(url, path, new DownloadTools.DownloadCallback() {
+                            @Override
+                            public void onInit() {
+
+                            }
+
+                            @Override
+                            public void onSuccess(String path) {
+                                //下载成功，返回下载地址
+
+                            }
+
+                            @Override
+                            public void onError(String err) {
+
+                            }
+
+                            @Override
+                            public void onUpdate(int i) {
+
+                            }
+                        })
                         .create();
                 dialog.show();
 
