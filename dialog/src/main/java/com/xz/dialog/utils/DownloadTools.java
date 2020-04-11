@@ -29,21 +29,16 @@ public class DownloadTools extends AsyncTask<Void, Integer, String> {
 
 
     /**
+     * 开始执行下载
      * 提供下载地址和存储地址
      *
      * @param remoteUrl
      * @param localPath
      */
-    public DownloadTools(@NonNull String remoteUrl, @NonNull String localPath) {
+    public void start(@NonNull String remoteUrl, @NonNull String localPath, DownloadCallback callback) {
+        mCallback = callback;
         this.remoteUrl = remoteUrl;
         this.localPath = localPath;
-    }
-
-    /**
-     * 开始执行下载
-     */
-    public void start(DownloadCallback callback) {
-        mCallback = callback;
         execute();
     }
 

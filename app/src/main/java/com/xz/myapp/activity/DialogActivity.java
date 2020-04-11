@@ -160,7 +160,7 @@ public class DialogActivity extends BaseActivity {
                 String url = "https://cn.bing.com/th?id=OHR.SpiritSiblings_EN-CN1295893854_1920x1080.jpg&rf=LaDigue_1920x1080.jpg";
                 String path = mContext.getExternalFilesDir("update").getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg";
                 UpdateDialog dialog = new UpdateDialog.Builder(mContext)
-                        .setVersionName("v1.0.0")
+                        .setVersionName("v1.2.1")
                         .setContent("1.新的模组加入\n2.自定义控件漏洞修复\n3.腾讯Api接口接入\n4.界面美化设计\n5.修复某个致命漏洞\n6.加入苹果风对话框")
                         .setDownload(url, path, new DownloadTools.DownloadCallback() {
                             @Override

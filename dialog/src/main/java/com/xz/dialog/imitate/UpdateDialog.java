@@ -70,8 +70,8 @@ public class UpdateDialog extends BaseDialog {
             @Override
             public void onClick(View v) {
 
-                DownloadTools downloadTools = new DownloadTools(remoteUrl, localPath);
-                downloadTools.start(new DownloadTools.DownloadCallback() {
+                DownloadTools downloadTools = new DownloadTools();
+                downloadTools.start(remoteUrl, localPath, new DownloadTools.DownloadCallback() {
                     @Override
                     public void onInit() {
                         tvDownload.setVisibility(View.GONE);
