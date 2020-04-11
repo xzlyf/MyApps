@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class UpdateDialog extends BaseDialog {
     private int titleBackgroundRes;//标题背景资源
     private String versionName;//版本号
     private String content;//内容
+    private UpdateListener callback;
 
     private ImageView titleBg;
     private ImageView tvClose;
@@ -35,10 +37,13 @@ public class UpdateDialog extends BaseDialog {
     private TextView tvContent;
     private TextView tvProgress;
     private TextView tvDownload;
+    private FrameLayout downloadLayout;
+    private TextView tvCancel;
     private Typeface tf;
     private String remoteUrl;
     private String localPath;
-    private DownloadTools.DownloadCallback callback;
+    private DownloadTools downloadTools;
+
 
     public UpdateDialog(Context context) {
         super(context);
@@ -52,7 +57,9 @@ public class UpdateDialog extends BaseDialog {
 
     @Override
     protected void initView() {
-
+        downloadTools = new DownloadTools();
+        downloadLayout = findViewById(R.id.layout_download);
+        tvCancel = findViewById(R.id.tv_cancel);
         titleBg = findViewById(R.id.title_bg);
         tvClose = findViewById(R.id.tv_close);
         tvVersion = findViewById(R.id.tv_version);
@@ -70,25 +77,23 @@ public class UpdateDialog extends BaseDialog {
             @Override
             public void onClick(View v) {
 
-                DownloadTools downloadTools = new DownloadTools();
                 downloadTools.start(remoteUrl, localPath, new DownloadTools.DownloadCallback() {
                     @Override
                     public void onInit() {
                         tvDownload.setVisibility(View.GONE);
-                        tvProgress.setVisibility(View.VISIBLE);
+                        downloadLayout.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onSuccess(String path) {
-                        Toast.makeText(mContext, "成功了", Toast.LENGTH_SHORT).show();
+                        callback.onSuccess(path);
                     }
 
                     @Override
                     public void onError(String err) {
-                        Toast.makeText(mContext, "失败了" + err, Toast.LENGTH_SHORT).show();
                         tvDownload.setVisibility(View.VISIBLE);
-                        tvProgress.setVisibility(View.GONE);
-
+                        downloadLayout.setVisibility(View.GONE);
+                        callback.onFailed(err);
                     }
 
                     @Override
@@ -98,12 +103,21 @@ public class UpdateDialog extends BaseDialog {
                 });
             }
         });
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadTools.cancel();
+                tvDownload.setVisibility(View.VISIBLE);
+                downloadLayout.setVisibility(View.GONE);
+            }
+        });
     }
+
 
     @Override
     protected void initData() {
         tvClose.setColorFilter(Color.WHITE);
-        tvProgress.setVisibility(View.GONE);
+        downloadLayout.setVisibility(View.GONE);
         tvDownload.setVisibility(View.VISIBLE);
         titleBackgroundRes = R.drawable.bg_update;
         versionName = "";
@@ -183,7 +197,7 @@ public class UpdateDialog extends BaseDialog {
          * @return
          */
         @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        public Builder setDownload(String remoteUrl, String localPath, DownloadTools.DownloadCallback callback) {
+        public Builder setDownload(String remoteUrl, String localPath, UpdateListener callback) {
             dialog.remoteUrl = remoteUrl;
             dialog.localPath = localPath;
             dialog.callback = callback;
@@ -193,5 +207,13 @@ public class UpdateDialog extends BaseDialog {
         public UpdateDialog create() {
             return dialog;
         }
+    }
+
+    public interface UpdateListener {
+        //成功返回文件地址
+        void onSuccess(String path);
+
+        //失败放回原因
+        void onFailed(String err);
     }
 }

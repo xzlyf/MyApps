@@ -3,6 +3,7 @@ package com.xz.myapp.activity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -162,26 +163,15 @@ public class DialogActivity extends BaseActivity {
                 UpdateDialog dialog = new UpdateDialog.Builder(mContext)
                         .setVersionName("v1.2.1")
                         .setContent("1.新的模组加入\n2.自定义控件漏洞修复\n3.腾讯Api接口接入\n4.界面美化设计\n5.修复某个致命漏洞\n6.加入苹果风对话框")
-                        .setDownload(url, path, new DownloadTools.DownloadCallback() {
-                            @Override
-                            public void onInit() {
-
-                            }
-
+                        .setDownload(url, path, new UpdateDialog.UpdateListener() {
                             @Override
                             public void onSuccess(String path) {
-                                //下载成功，返回下载地址
-
+                                Toast.makeText(mContext, "成功了", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
-                            public void onError(String err) {
-
-                            }
-
-                            @Override
-                            public void onUpdate(int i) {
-
+                            public void onFailed(String err) {
+                                Toast.makeText(mContext, "失败了" + err, Toast.LENGTH_SHORT).show();
                             }
                         })
                         .create();

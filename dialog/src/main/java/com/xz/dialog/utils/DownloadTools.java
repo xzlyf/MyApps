@@ -42,6 +42,12 @@ public class DownloadTools extends AsyncTask<Void, Integer, String> {
         execute();
     }
 
+    public void cancel(){
+        if (!isCancelled()){
+            cancel(true);
+        }
+    }
+
 
     /**
      * 下载前操作，还在主线程
@@ -121,6 +127,7 @@ public class DownloadTools extends AsyncTask<Void, Integer, String> {
     @Override
     protected void onPostExecute(String string) {
         super.onPostExecute(string);
+        Log.d(TAG, "onPostExecute: ");
         if (string.equals("success")) {
             mCallback.onSuccess(localPath);
         } else {
@@ -135,6 +142,7 @@ public class DownloadTools extends AsyncTask<Void, Integer, String> {
     @Override
     protected void onCancelled() {
         super.onCancelled();
+        Log.d(TAG, "onCancelled: ");
     }
 
 
