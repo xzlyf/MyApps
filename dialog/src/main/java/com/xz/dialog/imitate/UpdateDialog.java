@@ -82,6 +82,9 @@ public class UpdateDialog extends BaseDialog {
                     public void onInit() {
                         tvDownload.setVisibility(View.GONE);
                         downloadLayout.setVisibility(View.VISIBLE);
+
+
+
                     }
 
                     @Override
