@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,8 +43,8 @@ public class DownloadTools extends AsyncTask<Void, Integer, String> {
         execute();
     }
 
-    public void cancel(){
-        if (!isCancelled()){
+    public void cancel() {
+        if (!isCancelled()) {
             cancel(true);
         }
     }
@@ -66,7 +67,19 @@ public class DownloadTools extends AsyncTask<Void, Integer, String> {
      */
     @Override
     protected String doInBackground(Void... voids) {
-        int TIME_OUT = 5000;
+        File file = new File(localPath);
+        Log.d(TAG, "doInBackground: " + file.getParentFile().toString());
+        if (file.isDirectory()) {
+            return "Path is Directory";
+        }
+        if (!file.getParentFile().exists()){
+            file.mkdirs();
+        }
+        if (file.exists()) {
+            file.delete();
+        }
+
+        int TIME_OUT = 30 * 1000;
         InputStream input = null;
         OutputStream output = null;
         HttpURLConnection connection = null;
@@ -84,7 +97,7 @@ public class DownloadTools extends AsyncTask<Void, Integer, String> {
             //文件大小
             int fileLength = connection.getContentLength();
             input = connection.getInputStream();
-            output = new FileOutputStream(localPath);
+            output = new FileOutputStream(file);
 
             byte[] data = new byte[2048];
             long total = 0;
@@ -103,6 +116,20 @@ public class DownloadTools extends AsyncTask<Void, Integer, String> {
         } catch (IOException e) {
             e.printStackTrace();
             return "error:" + e.getMessage();
+        } finally {
+            try {
+                if (output != null) {
+                    output.close();
+                }
+                if (input != null) {
+                    input.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
 
         return "success";
@@ -131,6 +158,11 @@ public class DownloadTools extends AsyncTask<Void, Integer, String> {
         if (string.equals("success")) {
             mCallback.onSuccess(localPath);
         } else {
+            //下载失败自动删除未完成文件
+            File file = new File(localPath);
+            if (file.exists()) {
+                file.delete();
+            }
             mCallback.onError(string);
         }
     }

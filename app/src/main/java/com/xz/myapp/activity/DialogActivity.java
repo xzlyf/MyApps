@@ -158,12 +158,15 @@ public class DialogActivity extends BaseActivity {
                         return;
                     }
                 }
-                String url = "https://cn.bing.com/th?id=OHR.SpiritSiblings_EN-CN1295893854_1920x1080.jpg&rf=LaDigue_1920x1080.jpg";
-                String path = mContext.getExternalFilesDir("update").getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg";
+                //String url = "https://cn.bing.com/th?id=OHR.SpiritSiblings_EN-CN1295893854_1920x1080.jpg&rf=LaDigue_1920x1080.jpg";
+                String url = "http://wap.apk.anzhi.com/data5/apk/202003/30/695ae0953f7ba5b2b7dac520235700dd_29486500.apk";
+                String path = mContext.getExternalFilesDir("update").getAbsolutePath() + "/";
+                String fileName = System.currentTimeMillis() + ".apk";
+
                 UpdateDialog dialog = new UpdateDialog.Builder(mContext)
                         .setVersionName("v1.2.1")
                         .setContent("1.新的模组加入\n2.自定义控件漏洞修复\n3.腾讯Api接口接入\n4.界面美化设计\n5.修复某个致命漏洞\n6.加入苹果风对话框")
-                        .setDownload(url, path, new UpdateDialog.UpdateListener() {
+                        .setDownload(url, fileName, path, new UpdateDialog.UpdateListener() {
                             @Override
                             public void onSuccess(String path) {
                                 Toast.makeText(mContext, "成功了", Toast.LENGTH_SHORT).show();

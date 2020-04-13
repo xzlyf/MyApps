@@ -37,12 +37,9 @@ public class UpdateDialog extends BaseDialog {
     private TextView tvContent;
     private TextView tvProgress;
     private TextView tvDownload;
-    private FrameLayout downloadLayout;
-    private TextView tvCancel;
     private Typeface tf;
     private String remoteUrl;
     private String localPath;
-    private DownloadTools downloadTools;
 
 
     public UpdateDialog(Context context) {
@@ -57,9 +54,6 @@ public class UpdateDialog extends BaseDialog {
 
     @Override
     protected void initView() {
-        downloadTools = new DownloadTools();
-        downloadLayout = findViewById(R.id.layout_download);
-        tvCancel = findViewById(R.id.tv_cancel);
         titleBg = findViewById(R.id.title_bg);
         tvClose = findViewById(R.id.tv_close);
         tvVersion = findViewById(R.id.tv_version);
@@ -76,42 +70,7 @@ public class UpdateDialog extends BaseDialog {
         tvDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                downloadTools.start(remoteUrl, localPath, new DownloadTools.DownloadCallback() {
-                    @Override
-                    public void onInit() {
-                        tvDownload.setVisibility(View.GONE);
-                        downloadLayout.setVisibility(View.VISIBLE);
-
-
-
-                    }
-
-                    @Override
-                    public void onSuccess(String path) {
-                        callback.onSuccess(path);
-                    }
-
-                    @Override
-                    public void onError(String err) {
-                        tvDownload.setVisibility(View.VISIBLE);
-                        downloadLayout.setVisibility(View.GONE);
-                        callback.onFailed(err);
-                    }
-
-                    @Override
-                    public void onUpdate(int i) {
-                        tvProgress.setText(i + "%");
-                    }
-                });
-            }
-        });
-        tvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                downloadTools.cancel();
-                tvDownload.setVisibility(View.VISIBLE);
-                downloadLayout.setVisibility(View.GONE);
+                doDownload();
             }
         });
     }
@@ -120,7 +79,7 @@ public class UpdateDialog extends BaseDialog {
     @Override
     protected void initData() {
         tvClose.setColorFilter(Color.WHITE);
-        downloadLayout.setVisibility(View.GONE);
+        tvProgress.setVisibility(View.GONE);
         tvDownload.setVisibility(View.VISIBLE);
         titleBackgroundRes = R.drawable.bg_update;
         versionName = "";
@@ -147,6 +106,39 @@ public class UpdateDialog extends BaseDialog {
             tvVersion.setText(versionName);
         }
         tvContent.setText(content);
+    }
+
+    /**
+     * 执行下载
+     */
+    private void doDownload() {
+        DownloadTools downloadTools = new DownloadTools();
+        downloadTools.start(remoteUrl, localPath, new DownloadTools.DownloadCallback() {
+            @Override
+            public void onInit() {
+                tvDownload.setVisibility(View.GONE);
+                tvProgress.setVisibility(View.VISIBLE);
+
+
+            }
+
+            @Override
+            public void onSuccess(String path) {
+                callback.onSuccess(path);
+            }
+
+            @Override
+            public void onError(String err) {
+                tvDownload.setVisibility(View.VISIBLE);
+                tvProgress.setVisibility(View.GONE);
+                callback.onFailed(err);
+            }
+
+            @Override
+            public void onUpdate(int i) {
+                tvProgress.setText(i + "%");
+            }
+        });
     }
 
 
@@ -195,14 +187,15 @@ public class UpdateDialog extends BaseDialog {
          * 设置下载
          *
          * @param remoteUrl 下载地址
-         * @param localPath 文件路径，包含文件名和拓展名的路径
+         * @param fileName  文件名
+         * @param localPath 文件路径
          * @param callback  回调
          * @return
          */
         @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        public Builder setDownload(String remoteUrl, String localPath, UpdateListener callback) {
+        public Builder setDownload(String remoteUrl, String fileName, String localPath, UpdateListener callback) {
             dialog.remoteUrl = remoteUrl;
-            dialog.localPath = localPath;
+            dialog.localPath = localPath + fileName;
             dialog.callback = callback;
             return this;
         }
