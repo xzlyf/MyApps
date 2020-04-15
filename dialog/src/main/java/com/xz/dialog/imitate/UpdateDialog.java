@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -12,11 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
 
 import com.xz.dialog.R;
 import com.xz.dialog.base.BaseDialog;
 import com.xz.dialog.utils.DownloadTools;
+import com.xz.dialog.utils.SystemUtils;
+
+import java.io.File;
 
 /**
  * @author czr
@@ -114,12 +119,11 @@ public class UpdateDialog extends BaseDialog {
     private void doDownload() {
         DownloadTools downloadTools = new DownloadTools();
         downloadTools.start(remoteUrl, localPath, new DownloadTools.DownloadCallback() {
+
             @Override
             public void onInit() {
                 tvDownload.setVisibility(View.GONE);
                 tvProgress.setVisibility(View.VISIBLE);
-
-
             }
 
             @Override
@@ -199,6 +203,7 @@ public class UpdateDialog extends BaseDialog {
             dialog.callback = callback;
             return this;
         }
+
 
         public UpdateDialog create() {
             return dialog;

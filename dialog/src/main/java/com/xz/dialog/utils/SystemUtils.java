@@ -1,7 +1,20 @@
 package com.xz.dialog.utils;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
+import android.util.Log;
+
+import androidx.annotation.RequiresApi;
+import androidx.annotation.RequiresPermission;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+
+import java.io.File;
 
 /**
  * @author czr
@@ -31,4 +44,6 @@ public class SystemUtils {
         return configuration.orientation;
 
     }
+
+
 }

@@ -19,7 +19,9 @@ import com.xz.dialog.imitate.AppleListDialog;
 import com.xz.dialog.imitate.IconDialog;
 import com.xz.dialog.imitate.UpdateDialog;
 import com.xz.dialog.utils.DownloadTools;
+import com.xz.dialog.utils.SystemUtils;
 import com.xz.myapp.R;
+import com.xz.utils.SystemUtil;
 
 import butterknife.BindView;
 
@@ -159,7 +161,8 @@ public class DialogActivity extends BaseActivity {
                     }
                 }
                 //String url = "https://cn.bing.com/th?id=OHR.SpiritSiblings_EN-CN1295893854_1920x1080.jpg&rf=LaDigue_1920x1080.jpg";
-                String url = "http://wap.apk.anzhi.com/data5/apk/202003/30/695ae0953f7ba5b2b7dac520235700dd_29486500.apk";
+//                String url = "http://wap.apk.anzhi.com/data5/apk/202003/30/695ae0953f7ba5b2b7dac520235700dd_29486500.apk";
+                String url = "http://yapkwww.cdn.anzhi.com/data1/apk/201804/24/com.google.android.music_36314500.apk";
                 String path = mContext.getExternalFilesDir("update").getAbsolutePath() + "/";
                 String fileName = System.currentTimeMillis() + ".apk";
 
@@ -169,7 +172,8 @@ public class DialogActivity extends BaseActivity {
                         .setDownload(url, fileName, path, new UpdateDialog.UpdateListener() {
                             @Override
                             public void onSuccess(String path) {
-                                Toast.makeText(mContext, "成功了", Toast.LENGTH_SHORT).show();
+                                Log.w(TAG, "onSuccess: "+path );
+                                SystemUtil.newInstallAppIntent(mContext, path);
                             }
 
                             @Override
