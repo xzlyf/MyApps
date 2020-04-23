@@ -172,13 +172,18 @@ public class DialogActivity extends BaseActivity {
                         .setDownload(url, fileName, path, new UpdateDialog.UpdateListener() {
                             @Override
                             public void onSuccess(String path) {
-                                Log.w(TAG, "onSuccess: "+path );
-                                SystemUtil.newInstallAppIntent(mContext, path);
+                                Log.w(TAG, "onSuccess: " + path);
                             }
 
                             @Override
                             public void onFailed(String err) {
                                 Toast.makeText(mContext, "失败了" + err, Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setInstallOnClickListener(new UpdateDialog.InstallListener() {
+                            @Override
+                            public void install(String path) {
+                                SystemUtil.newInstallAppIntent(mContext, path);
                             }
                         })
                         .create();

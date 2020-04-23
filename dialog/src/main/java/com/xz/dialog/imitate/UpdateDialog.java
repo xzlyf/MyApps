@@ -42,9 +42,11 @@ public class UpdateDialog extends BaseDialog {
     private TextView tvContent;
     private TextView tvProgress;
     private TextView tvDownload;
+    private TextView tvInstall;
     private Typeface tf;
     private String remoteUrl;
     private String localPath;
+    private InstallListener mInstallListener;
 
 
     public UpdateDialog(Context context) {
@@ -65,6 +67,7 @@ public class UpdateDialog extends BaseDialog {
         tvContent = findViewById(R.id.tv_content);
         tvProgress = findViewById(R.id.tv_progress);
         tvDownload = findViewById(R.id.tv_download);
+        tvInstall = findViewById(R.id.tv_install);
         tvClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,11 +81,20 @@ public class UpdateDialog extends BaseDialog {
                 doDownload();
             }
         });
+        tvInstall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mInstallListener != null) {
+                    mInstallListener.install(localPath);
+                }
+            }
+        });
     }
 
 
     @Override
     protected void initData() {
+        tvInstall.setVisibility(View.GONE);
         tvClose.setColorFilter(Color.WHITE);
         tvProgress.setVisibility(View.GONE);
         tvDownload.setVisibility(View.VISIBLE);
@@ -124,11 +136,14 @@ public class UpdateDialog extends BaseDialog {
             public void onInit() {
                 tvDownload.setVisibility(View.GONE);
                 tvProgress.setVisibility(View.VISIBLE);
+                tvInstall.setVisibility(View.GONE);
             }
 
             @Override
             public void onSuccess(String path) {
                 callback.onSuccess(path);
+                tvProgress.setVisibility(View.GONE);
+                tvInstall.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -205,6 +220,18 @@ public class UpdateDialog extends BaseDialog {
         }
 
 
+        /**
+         * 安装按钮监听
+         *
+         * @param listener
+         * @return
+         */
+        public Builder setInstallOnClickListener(InstallListener listener) {
+            dialog.mInstallListener = listener;
+            return this;
+        }
+
+
         public UpdateDialog create() {
             return dialog;
         }
@@ -216,5 +243,9 @@ public class UpdateDialog extends BaseDialog {
 
         //失败放回原因
         void onFailed(String err);
+    }
+
+    public interface InstallListener {
+        void install(String path);
     }
 }

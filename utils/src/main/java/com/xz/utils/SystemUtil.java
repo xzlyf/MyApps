@@ -1,11 +1,14 @@
 package com.xz.utils;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
 import androidx.core.content.FileProvider;
 
@@ -44,6 +47,7 @@ public class SystemUtil {
      * </paths>
      * </p>
      */
+    @RequiresPermission(android.Manifest.permission.REQUEST_INSTALL_PACKAGES)
     public static void newInstallAppIntent(Context context, String apkFile) {
 
         Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
@@ -61,4 +65,5 @@ public class SystemUtil {
         context.startActivity(intent);
 
     }
+
 }
