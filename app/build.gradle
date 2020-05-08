@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
-
+apply from:"../config.gradle"
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    compileSdkVersion COMPILE_SDK_VERSION
+    buildToolsVersion BUILD_TOOLS_VERSION
     defaultConfig {
         applicationId "com.xz.myapp"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -51,6 +51,7 @@ dependencies {
     implementation project(path: ':base')
     implementation project(path: ':utils')
     implementation project(path: ':dialog')
+    implementation project(path: ':net')
 
     //高斯模糊控件
     implementation 'io.alterac.blurkit:blurkit:1.1.0'
