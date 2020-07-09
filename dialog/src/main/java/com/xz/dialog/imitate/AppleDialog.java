@@ -48,12 +48,6 @@ public class AppleDialog extends BaseDialog {
 
     @Override
     protected void initData() {
-        //使用苹果字体
-        Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/pingfangziti.ttf");
-        tvTitle.setTypeface(typeface, Typeface.BOLD);
-        tvContent.setTypeface(typeface);
-        negative.setTypeface(typeface);
-        positive.setTypeface(typeface);
 
         title = "示例";
         content = "Hello world!";

@@ -50,10 +50,6 @@ public class AppleListDialog extends BaseDialog {
 
     @Override
     protected void initData() {
-        //使用苹果字体
-        Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/pingfangziti.ttf");
-        tvTitle.setTypeface(typeface, Typeface.BOLD);
-        tvContent.setTypeface(typeface);
 
         title = "示例";
         content = "是否为我打分~";

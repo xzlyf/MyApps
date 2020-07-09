@@ -54,13 +54,6 @@ public class AppleInputDialog extends BaseDialog {
 
     @Override
     protected void initData() {
-        //使用苹果字体
-        Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/pingfangziti.ttf");
-        tvTitle.setTypeface(typeface, Typeface.BOLD);
-        tvContent.setTypeface(typeface);
-        negative.setTypeface(typeface);
-        positive.setTypeface(typeface);
-        etContent.setTypeface(typeface);
 
         title = "标题";
         content = "请修改内容\nsetContent()";
