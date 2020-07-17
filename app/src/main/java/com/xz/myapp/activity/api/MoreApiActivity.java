@@ -1,17 +1,11 @@
 package com.xz.myapp.activity.api;
 
-import android.os.Bundle;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-
-import androidx.appcompat.app.AppCompatDelegate;
 
 import com.xz.base.BaseActivity;
 import com.xz.myapp.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.alterac.blurkit.BlurLayout;
 
 public class MoreApiActivity extends BaseActivity {

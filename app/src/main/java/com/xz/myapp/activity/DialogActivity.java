@@ -18,8 +18,6 @@ import com.xz.dialog.imitate.AppleInputDialog;
 import com.xz.dialog.imitate.AppleListDialog;
 import com.xz.dialog.imitate.IconDialog;
 import com.xz.dialog.imitate.UpdateDialog;
-import com.xz.dialog.utils.DownloadTools;
-import com.xz.dialog.utils.SystemUtils;
 import com.xz.myapp.R;
 import com.xz.utils.SystemUtil;
 

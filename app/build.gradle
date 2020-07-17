@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply from:"../config.gradle"
+apply from: "../config.gradle"
 android {
     compileSdkVersion COMPILE_SDK_VERSION
     buildToolsVersion BUILD_TOOLS_VERSION
@@ -64,5 +64,8 @@ dependencies {
 
     //底部导航栏
     implementation 'com.roughike:bottom-bar:2.3.1'
+
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
 }

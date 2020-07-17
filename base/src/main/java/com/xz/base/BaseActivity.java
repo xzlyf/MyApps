@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +23,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.orhanobut.logger.Logger;
-import com.xz.base.utils.ThreadUtil;
 import com.xz.base.utils.ToastUtil;
 
 import butterknife.ButterKnife;

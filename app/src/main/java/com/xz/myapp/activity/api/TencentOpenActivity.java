@@ -16,12 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 
 public class TencentOpenActivity extends BaseActivity {
     //存储地址

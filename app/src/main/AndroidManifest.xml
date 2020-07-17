@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.NotificationActivity"></activity>
+        <activity android:name=".activity.SecondEventBusActivity"></activity>
+        <activity android:name=".activity.EventBusActivity" />
+        <activity android:name=".activity.NotificationActivity" />
         <activity android:name=".activity.DialogActivity" />
         <activity android:name=".activity.api.MoreApiActivity" />
         <activity android:name=".activity.WebViewActivity" />

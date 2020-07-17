@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,7 +18,6 @@ import com.xz.base.BaseActivity;
 import com.xz.myapp.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class NotificationActivity extends BaseActivity {
 
