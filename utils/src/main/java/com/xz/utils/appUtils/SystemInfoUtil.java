@@ -1,11 +1,10 @@
-package com.xz.utils.hardware;
+package com.xz.utils.appUtils;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import androidx.annotation.RequiresPermission;
 
@@ -18,7 +17,8 @@ public class SystemInfoUtil {
 
     /**
      * 常用信息合集
-     *  示例：Genymotion_Custom_Android_7.1.1_000000000000000
+     * 示例：Genymotion_Custom_Android_7.1.1_000000000000000
+     *
      * @return
      */
     public static String getInfo(Context context) {
@@ -102,8 +102,7 @@ public class SystemInfoUtil {
      *
      * @return 手机IMEI
      */
-    ;
-
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getIMEI(Context ctx) {
         TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Activity.TELEPHONY_SERVICE);
         if (tm != null) {

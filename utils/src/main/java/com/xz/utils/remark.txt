@@ -1,0 +1,13 @@
+获取Intent的参数和值
+
+    Bundle extras = intent.getExtras();
+            Set<String> strings = extras.keySet();
+            for (String keyStr : strings) {
+                if (extras.get(keyStr) instanceof Integer) {
+                    Log.v(TAG, "intent extras(int) :" + keyStr + ":" + extras.get(keyStr));
+                } else if (extras.get(keyStr) instanceof String) {
+                    Log.v(TAG, "intent extras(String) :" + keyStr + ":" + extras.get(keyStr));
+                } else {
+                    Log.v(TAG, "intent extras() :" + keyStr + ":" + extras.get(keyStr));
+                }
+            }

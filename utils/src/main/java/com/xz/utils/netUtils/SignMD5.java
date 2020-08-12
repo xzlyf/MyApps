@@ -1,10 +1,8 @@
-package com.xz.utils.network;
+package com.xz.utils.netUtils;
 
-import com.orhanobut.logger.Logger;
-import com.xz.utils.MD5Util;
+import com.xz.utils.encodUtils.MD5Util;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Comparator;
 import java.util.Iterator;

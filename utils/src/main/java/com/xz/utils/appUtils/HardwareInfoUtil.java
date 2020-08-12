@@ -1,4 +1,4 @@
-package com.xz.utils.hardware;
+package com.xz.utils.appUtils;
 
 import android.app.Activity;
 import android.content.Context;

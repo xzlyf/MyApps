@@ -6,11 +6,11 @@ import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.Request;
 import com.xz.base.BaseActivity;
 import com.xz.myapp.R;
-import com.xz.utils.Base64Util;
-import com.xz.utils.MD5Util;
+import com.xz.utils.encodUtils.Base64Util;
+import com.xz.utils.encodUtils.MD5Util;
 import com.xz.utils.RandomUtil;
-import com.xz.utils.network.OkHttpClientManager;
-import com.xz.utils.network.SignMD5;
+import com.xz.utils.netUtils.OkHttpClientManager;
+import com.xz.utils.netUtils.SignMD5;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.xz.utils.network;
+package com.xz.utils.netUtils;
 
 import android.content.Context;
 import android.os.Handler;
@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
@@ -59,6 +60,9 @@ public class OkHttpClientManager {
         mOkHttpClient = new OkHttpClient();
         //cookie enabled
         mOkHttpClient.setCookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ORIGINAL_SERVER));
+        mOkHttpClient.setConnectTimeout(15, TimeUnit.SECONDS);
+        mOkHttpClient.setReadTimeout(15, TimeUnit.SECONDS);
+        mOkHttpClient.setWriteTimeout(15, TimeUnit.SECONDS);
         mOkHttpClient.setHostnameVerifier(new HostnameVerifier() {
             @Override
             public boolean verify(String hostname, SSLSession session) {

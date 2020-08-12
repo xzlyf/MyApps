@@ -1,4 +1,4 @@
-package com.xz.utils;
+package com.xz.utils.appUtils;
 
 import android.Manifest;
 import android.annotation.TargetApi;

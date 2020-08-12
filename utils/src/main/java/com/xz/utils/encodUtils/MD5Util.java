@@ -1,4 +1,4 @@
-package com.xz.utils;
+package com.xz.utils.encodUtils;
 
 import java.io.File;
 import java.io.FileInputStream;

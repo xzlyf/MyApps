@@ -1,4 +1,4 @@
-package com.xz.utils.network;
+package com.xz.utils.netUtils;
 
 import android.Manifest;
 import android.content.Context;
