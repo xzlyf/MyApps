@@ -29,7 +29,7 @@
         <activity android:name=".activity.ButtonActitvity" />
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".StartActivity"
+            android:name=".activity.StartActivity"
             android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

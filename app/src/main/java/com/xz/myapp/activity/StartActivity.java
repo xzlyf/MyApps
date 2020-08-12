@@ -1,4 +1,4 @@
-package com.xz.myapp;
+package com.xz.myapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
+
+import com.xz.myapp.MainActivity;
+import com.xz.myapp.R;
 
 public class StartActivity extends AppCompatActivity {
 
