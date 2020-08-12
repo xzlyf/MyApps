@@ -1,4 +1,4 @@
-package com.xz.utils;
+package com.xz.utils.appUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.view.Display;
 import android.view.Window;
 
 import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewUtil {
     /**
@@ -47,5 +48,29 @@ public class ViewUtil {
         return new int[]{display.getWidth(), display.getHeight()};
     }
 
+    /**
+     * px 转dp
+     *
+     * @param context
+     * @param pxValue
+     * @return
+     */
+    public static int px2dip(Context context, float pxValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * dp转 px
+     *
+     * @param context
+     * @param dpValue
+     * @return
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+
+    }
 
 }

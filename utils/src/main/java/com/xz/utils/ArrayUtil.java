@@ -15,8 +15,9 @@ public class ArrayUtil {
      * [7, 8, 9, 10, 11, 12]
      * [13, 14]
      *
-     * @param data
-     * @return
+     * @param div  指定切割长度
+     * @param data 元数据
+     * @return 切割好的数据
      */
     public static List<byte[]> optByte(int div, byte[] data) {
 
@@ -38,4 +39,31 @@ public class ArrayUtil {
 
         return base;
     }
+
+    /**
+     * 将一个集合拆分成制定长度的若干个集合
+     *
+     * @param list 元数据
+     * @param len 指定切割长度
+     * @return
+     */
+    public static List<List<?>> splitList(List<?> list, int len) {
+        if (list == null || list.size() == 0 || len < 1) {
+            return null;
+        }
+
+        List<List<?>> result = new ArrayList<List<?>>();
+
+
+        int size = list.size();
+        int count = (size + len - 1) / len;
+
+
+        for (int i = 0; i < count; i++) {
+            List<?> subList = list.subList(i * len, ((i + 1) * len > size ? size : len * (i + 1)));
+            result.add(subList);
+        }
+        return result;
+    }
+
 }

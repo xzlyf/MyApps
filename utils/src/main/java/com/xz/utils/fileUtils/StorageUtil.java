@@ -1,4 +1,4 @@
-package com.xz.utils;
+package com.xz.utils.fileUtils;
 
 import android.content.Context;
 import android.os.Environment;

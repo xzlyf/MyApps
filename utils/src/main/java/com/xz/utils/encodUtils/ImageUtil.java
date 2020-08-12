@@ -1,4 +1,4 @@
-package com.xz.utils;
+package com.xz.utils.encodUtils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

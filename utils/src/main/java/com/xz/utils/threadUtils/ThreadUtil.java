@@ -1,4 +1,4 @@
-package com.xz.utils;
+package com.xz.utils.threadUtils;
 
 import android.os.Handler;
 import android.os.Looper;

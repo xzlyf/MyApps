@@ -1,4 +1,4 @@
-package com.xz.utils;
+package com.xz.utils.fileUtils;
 
 import android.util.Log;
 

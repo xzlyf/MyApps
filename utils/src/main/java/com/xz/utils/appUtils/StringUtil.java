@@ -1,11 +1,82 @@
-package com.xz.utils;
+package com.xz.utils.appUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtil {
+    /**
+     * 返回指定长度的随机字符串
+     * @param length
+     * @return
+     */
+    public static String getRandomString(int length){
+        String st = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234657980";
+        Random random = new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(36);
+            sb.append(st.charAt(number));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 返回指定长度的随机字符串，可指定大小写
+     * @param length
+     * @param isLower
+     * @return
+     */
+    public static String getRandomString(int length,boolean isLower){
+        String st = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234657980abcdefghijklmnopqrstuvwxyz";
+        Random random = new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(st.length());
+            sb.append(st.charAt(number));
+        }
+        if (isLower){
+            return sb.toString().toLowerCase();
+        }else{
+            return sb.toString();
+        }
+    }
+
+    /**
+     * 拼接URL
+     * @param baseUrl
+     * @param paraMap
+     * @return
+     */
+    public static String SplicUrl(String baseUrl, TreeMap<String,String> paraMap){
+
+        baseUrl = baseUrl+"?";
+        //拼接Url
+        for (String key :paraMap.keySet()){
+            baseUrl  = baseUrl+key+"="+paraMap.get(key)+"&";
+        }
+        baseUrl = baseUrl.substring(0,baseUrl.length()-1);
+        return baseUrl;
+    }
+
+    /**
+     * 切割指定字符
+     * @param text
+     * @param c 要切割的字符
+     * @return
+     */
+    public static String SplicString(String text,char c){
+        String str = "";
+        for (int i = 0;i<text.length();i++){
+            if (text.charAt(i)!=c){
+                str+=text.charAt(i);
+            }
+        }
+        return str;
+    }
     /*
      * 按指定长度，省略字符串部分字符
      * @para String 字符串

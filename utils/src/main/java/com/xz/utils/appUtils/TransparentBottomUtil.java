@@ -10,7 +10,7 @@ import android.view.WindowManager;
 /**
  * 虚拟导航键透明效果
  */
-public class TransparentBottom {
+public class TransparentBottomUtil {
     public static void transparentBottom(Activity activity){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // Android 5.0 以上 全透明

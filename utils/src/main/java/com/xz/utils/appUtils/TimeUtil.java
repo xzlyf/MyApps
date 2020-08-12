@@ -1,6 +1,4 @@
-package com.xz.utils;
-
-import android.util.Log;
+package com.xz.utils.appUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

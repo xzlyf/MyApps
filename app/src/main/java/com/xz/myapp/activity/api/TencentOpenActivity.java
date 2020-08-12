@@ -6,9 +6,9 @@ import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.Request;
 import com.xz.base.BaseActivity;
 import com.xz.myapp.R;
+import com.xz.utils.appUtils.StringUtil;
 import com.xz.utils.encodUtils.Base64Util;
 import com.xz.utils.encodUtils.MD5Util;
-import com.xz.utils.RandomUtil;
 import com.xz.utils.netUtils.OkHttpClientManager;
 import com.xz.utils.netUtils.SignMD5;
 
@@ -64,7 +64,7 @@ public class TencentOpenActivity extends BaseActivity {
         Map<String, Object> params = new HashMap<>();
         params.put("app_id", APP_ID);
         params.put("time_stamp", System.currentTimeMillis() / 1000);
-        params.put("nonce_str", RandomUtil.getRandomString(32));
+        params.put("nonce_str", StringUtil.getRandomString(32));
         //======
         params.put("speaker", 6);//发音人
         params.put("format", 3);//音频格式
@@ -121,7 +121,7 @@ public class TencentOpenActivity extends BaseActivity {
         Map<String, Object> params = new HashMap<>();
         params.put("app_id", APP_ID);
         params.put("time_stamp", System.currentTimeMillis() / 1000);
-        params.put("nonce_str", RandomUtil.getRandomString(32));
+        params.put("nonce_str", StringUtil.getRandomString(32));
         //=====
         params.put("session", 10000);//会话标识，应用内唯一，相当于房间号
         params.put("question", quest);
