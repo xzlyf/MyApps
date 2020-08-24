@@ -16,7 +16,7 @@ class SpacesItemDecorationUtil {
     /**
      * 水平间距
      */
-    static class SpacesItemDecorationHorizontal extends RecyclerView.ItemDecoration {
+    public static class SpacesItemDecorationHorizontal extends RecyclerView.ItemDecoration {
         private int horizontalSpace;
 
         public SpacesItemDecorationHorizontal(int space) {
@@ -37,7 +37,7 @@ class SpacesItemDecorationUtil {
     /**
      * 垂直间距
      */
-    static class SpacesItemDecorationVertical extends RecyclerView.ItemDecoration {
+    public static class SpacesItemDecorationVertical extends RecyclerView.ItemDecoration {
         int verticalSspace;
 
         public SpacesItemDecorationVertical(int space) {
@@ -59,7 +59,7 @@ class SpacesItemDecorationUtil {
      * 水平垂直间距
      * 同时设置
      */
-    static class SpacesItemDecorationVH extends RecyclerView.ItemDecoration {
+    public static class SpacesItemDecorationVH extends RecyclerView.ItemDecoration {
         int vhSspace;
 
         public SpacesItemDecorationVH(int space) {
