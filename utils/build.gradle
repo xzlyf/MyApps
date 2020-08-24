@@ -45,7 +45,7 @@ dependencies {
 apply plugin: 'maven'
 uploadArchives {
     repositories.mavenDeployer {
-        def mavenDirPath = file('E:\\xz\\maven')
+        def mavenDirPath = file('F:\\WorkSpace\\maven')
         repository(url: "file://${mavenDirPath.absolutePath}")
         pom.project {
             groupId "com.xz.maven.android"
