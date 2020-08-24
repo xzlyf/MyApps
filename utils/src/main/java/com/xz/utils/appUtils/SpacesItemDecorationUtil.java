@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * <p>
  * 调整recyclerView的item间距
  */
-class SpacesItemDecorationUtil {
+public class SpacesItemDecorationUtil {
 
     /**
      * 水平间距
