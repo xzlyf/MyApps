@@ -14,6 +14,9 @@ import android.net.Uri;
  * DownloadManager.Query 查询
  * <p>
  * 当下载完成会发送一个广播：DownloadManager.ACTION_DOWNLOAD_COMPLETE  参数：EXTRA_DOWNLOAD_ID 会返回下载ID
+ * <p>
+ * 基于 DownloadManager
+ * @isuse 目前发现不兼容问题 高版本会出现闪退
  */
 public class DownloadUtil {
     private static DownloadUtil instance;
@@ -47,7 +50,7 @@ public class DownloadUtil {
      */
     public void downloadToPublic(Context context, String downloadUrl, String fileName) {
         DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-        if (downloadManager==null)return;
+        if (downloadManager == null) return;
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(downloadUrl));
         request.setDestinationInExternalPublicDir("", fileName);
         request.setTitle(title);
@@ -66,7 +69,7 @@ public class DownloadUtil {
      */
     public void downloadToFile(Context context, String downloadUrl, String fileName) {
         DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-        if (downloadManager==null)return;
+        if (downloadManager == null) return;
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(downloadUrl));
         request.setDestinationInExternalFilesDir(context, "", fileName);
         request.setTitle(title);

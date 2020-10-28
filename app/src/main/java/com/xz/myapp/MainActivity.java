@@ -1,14 +1,21 @@
 package com.xz.myapp;
 
+import android.util.Log;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.orhanobut.logger.Logger;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.xz.base.BaseActivity;
 import com.xz.myapp.activity.fragment.ContentFragment;
 import com.xz.myapp.activity.fragment.HomeFragment;
 import com.xz.myapp.activity.fragment.SettingFragment;
+import com.xz.utils.fileUtils.StorageUtil;
+import com.xz.utils.netUtils.DownloadV2Util;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 
@@ -52,6 +59,7 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
 
     }
 
