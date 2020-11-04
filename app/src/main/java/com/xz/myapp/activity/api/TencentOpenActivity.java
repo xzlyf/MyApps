@@ -3,7 +3,6 @@ package com.xz.myapp.activity.api;
 import androidx.annotation.NonNull;
 
 import com.orhanobut.logger.Logger;
-import com.squareup.okhttp.Request;
 import com.xz.base.BaseActivity;
 import com.xz.myapp.R;
 import com.xz.utils.appUtils.StringUtil;
@@ -18,6 +17,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.Request;
 
 public class TencentOpenActivity extends BaseActivity {
     //存储地址

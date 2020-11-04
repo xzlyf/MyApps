@@ -14,8 +14,16 @@ import com.xz.myapp.activity.fragment.HomeFragment;
 import com.xz.myapp.activity.fragment.SettingFragment;
 import com.xz.utils.fileUtils.StorageUtil;
 import com.xz.utils.netUtils.DownloadV2Util;
+import com.xz.utils.netUtils.OkHttpClientManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -59,7 +67,6 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-
 
     }
 

@@ -1,21 +1,18 @@
 package com.xz.utils.netUtils;
 
-import android.Manifest;
-import android.os.Environment;
 import android.util.Log;
-import android.webkit.DownloadListener;
-
-import androidx.annotation.RequiresPermission;
-
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * @author czr
@@ -31,7 +28,12 @@ public class DownloadV2Util {
 
     private DownloadV2Util() {
         if (client == null) {
-            client = new OkHttpClient();
+            OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
+            okHttpBuilder.connectTimeout(15, TimeUnit.SECONDS);
+            okHttpBuilder.writeTimeout(15, TimeUnit.SECONDS);
+            okHttpBuilder.readTimeout(15, TimeUnit.SECONDS);
+            client = okHttpBuilder.build();
+
         }
     }
 
@@ -57,16 +59,17 @@ public class DownloadV2Util {
      */
     public void download(String url, final String savePath, final String fileName, final DownloadListener listener) {
 
-         Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder().url(url).build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Request request, IOException e) {
+            public void onFailure(Call call, IOException e) {
                 listener.onFailure(e);
+
             }
 
             @Override
-            public void onResponse(Response response) throws IOException {
+            public void onResponse(Call call, Response response) throws IOException {
                 InputStream is = null;
                 byte[] buf = new byte[2048];
                 int len = 0;
@@ -89,6 +92,7 @@ public class DownloadV2Util {
                         fos.write(buf, 0, len);
                         sum += len;
                         int progress = (int) (sum * 1.0f / total * 100);
+                        //注意这里回调还没有回到主线程
                         listener.onLoading(progress);
                     }
 
@@ -111,7 +115,20 @@ public class DownloadV2Util {
 
 
             }
+
         });
+    }
+
+
+    /**
+     * 断点下载
+     * 未完成
+     * @param url
+     * @param savePath
+     * @param fileName
+     */
+    public void download(String url, final String savePath, final String fileName) {
+
     }
 
 

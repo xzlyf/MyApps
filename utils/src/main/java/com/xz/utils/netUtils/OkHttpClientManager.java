@@ -3,21 +3,12 @@ package com.xz.utils.netUtils;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
 import com.orhanobut.logger.Logger;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.MultipartBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
 
 import org.json.JSONObject;
 
@@ -30,8 +21,15 @@ import java.lang.reflect.Type;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.net.FileNameMap;
+import java.net.MulticastSocket;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -39,7 +37,24 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.CookieJar;
+import okhttp3.FormBody;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 /**
@@ -57,18 +72,21 @@ public class OkHttpClientManager {
 
 
     private OkHttpClientManager() {
-        mOkHttpClient = new OkHttpClient();
-        //cookie enabled
-        mOkHttpClient.setCookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ORIGINAL_SERVER));
-        mOkHttpClient.setConnectTimeout(15, TimeUnit.SECONDS);
-        mOkHttpClient.setReadTimeout(15, TimeUnit.SECONDS);
-        mOkHttpClient.setWriteTimeout(15, TimeUnit.SECONDS);
-        mOkHttpClient.setHostnameVerifier(new HostnameVerifier() {
-            @Override
-            public boolean verify(String hostname, SSLSession session) {
-                return true;
-            }
-        });
+        OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
+        okHttpBuilder.connectTimeout(15, TimeUnit.SECONDS);
+        okHttpBuilder.writeTimeout(15, TimeUnit.SECONDS);
+        okHttpBuilder.readTimeout(15, TimeUnit.SECONDS);
+        //是否自动重连
+        okHttpBuilder.retryOnConnectionFailure(false);
+        //设置https配置
+        try {
+            okHttpBuilder.sslSocketFactory(createEasySSLContext().getSocketFactory(), new EasyX509TrustManager(null));
+        } catch (IOException | NoSuchAlgorithmException | KeyStoreException e) {
+            e.printStackTrace();
+            Log.e(TAG, "OkHttpClientManager: https Configuration failed ");
+        }
+        mOkHttpClient = okHttpBuilder.build();
+
         mDelivery = new Handler(Looper.getMainLooper());
         mGson = new Gson();
     }
@@ -83,6 +101,7 @@ public class OkHttpClientManager {
         }
         return mInstance;
     }
+
 
     /**
      * 同步的Get请求
@@ -133,7 +152,7 @@ public class OkHttpClientManager {
      * @param isHavFirst 是否需要问号
      * @return
      */
-    private static String attachHttpGetParams(String url, Map<String, Object> params, boolean isHavFirst) {
+    public static String attachHttpGetParams(String url, Map<String, Object> params, boolean isHavFirst) {
         Iterator<String> keys = params.keySet().iterator();
         Iterator<Object> values = params.values().iterator();
         StringBuffer stringBuffer = new StringBuffer();
@@ -207,7 +226,8 @@ public class OkHttpClientManager {
         if (params == null) {
             params = new Param[0];
         }
-        FormEncodingBuilder builder = new FormEncodingBuilder();
+        //        FormEncodingBuilder builder = new FormEncodingBuilder();
+        FormBody.Builder builder = new FormBody.Builder();
         for (Param param : params) {
             builder.add(param.key, param.value);
         }
@@ -319,12 +339,12 @@ public class OkHttpClientManager {
         final Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(final Request request, final IOException e) {
+            public void onFailure(Call call, IOException e) {
                 sendFailedStringCallback(request, e, callback);
             }
 
             @Override
-            public void onResponse(Response response) {
+            public void onResponse(Call call, Response response) throws IOException {
                 InputStream is = null;
                 byte[] buf = new byte[2048];
                 int len = 0;
@@ -353,6 +373,7 @@ public class OkHttpClientManager {
                 }
 
             }
+
         });
     }
 
@@ -437,8 +458,9 @@ public class OkHttpClientManager {
     private Request buildMultipartFormRequest(Context context, String url, File[] files,
                                               String[] fileKeys, Param[] params) {
         params = validateParam(params);
-        MultipartBuilder builder = new MultipartBuilder()
-                .type(MultipartBuilder.FORM);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+//        MultipartBuilder builder = new MultipartBuilder()
+//                .type(MultipartBuilder.FORM);
         for (Param param : params) {
             builder.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + param.key + "\""),
                     RequestBody.create(null, param.value));
@@ -511,17 +533,18 @@ public class OkHttpClientManager {
     private void deliveryResult(final ResultCallback callback, Request request) {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(final Request request, final IOException e) {
+            public void onFailure(Call call, IOException e) {
                 Logger.w("deliveryResult = " + e.getMessage());
                 if (e.toString().contains("closed") || e.toString().contains("Canceled")) {
                     //如果是主动取消的情况下
                 } else {
-                    sendFailedStringCallback(request, e, callback);
+//                    sendFailedStringCallback(request, e, callback);
+                    sendFailedStringCallback(call.request(), e, callback);
                 }
             }
 
             @Override
-            public void onResponse(final Response response) {
+            public void onResponse(Call call, Response response) throws IOException {
                 try {
                     final String string = response.body().string();
                     if (callback.mType == String.class) {
@@ -536,6 +559,7 @@ public class OkHttpClientManager {
                     sendFailedStringCallback(response.request(), e, callback);
                 }
             }
+
         });
     }
 
@@ -558,6 +582,16 @@ public class OkHttpClientManager {
                 }
             }
         });
+    }
+
+    private SSLContext createEasySSLContext() throws IOException {
+        try {
+            SSLContext context = SSLContext.getInstance("TLS");
+            context.init(null, null, null);
+            return context;
+        } catch (Exception e) {
+            throw new IOException(e.getMessage());
+        }
     }
 
     public static abstract class ResultCallback<T> {
@@ -605,5 +639,56 @@ public class OkHttpClientManager {
 
         String key;
         Object value;
+    }
+
+
+    private static class EasyX509TrustManager implements X509TrustManager {
+
+        private X509TrustManager standardTrustManager = null;
+
+        /**
+         * Constructor for EasyX509TrustManager.
+         */
+        private EasyX509TrustManager(KeyStore keystore) throws NoSuchAlgorithmException,
+                KeyStoreException {
+            super();
+            TrustManagerFactory factory = TrustManagerFactory.getInstance(TrustManagerFactory
+                    .getDefaultAlgorithm());
+            factory.init(keystore);
+            TrustManager[] trustmanagers = factory.getTrustManagers();
+            if (trustmanagers.length == 0) {
+                throw new NoSuchAlgorithmException("no trust manager found");
+            }
+            this.standardTrustManager = (X509TrustManager) trustmanagers[0];
+        }
+
+        /**
+         * @see X509TrustManager#checkClientTrusted(X509Certificate[],
+         * String authType)
+         */
+        public void checkClientTrusted(X509Certificate[] certificates, String authType)
+                throws CertificateException {
+            standardTrustManager.checkClientTrusted(certificates, authType);
+        }
+
+        /**
+         * @see X509TrustManager#checkServerTrusted(X509Certificate[],
+         * String authType)
+         */
+        public void checkServerTrusted(X509Certificate[] certificates, String authType)
+                throws CertificateException {
+            if ((certificates != null) && (certificates.length == 1)) {
+                certificates[0].checkValidity();
+            } else {
+                standardTrustManager.checkServerTrusted(certificates, authType);
+            }
+        }
+
+        /**
+         * @see X509TrustManager#getAcceptedIssuers()
+         */
+        public X509Certificate[] getAcceptedIssuers() {
+            return this.standardTrustManager.getAcceptedIssuers();
+        }
     }
 }
