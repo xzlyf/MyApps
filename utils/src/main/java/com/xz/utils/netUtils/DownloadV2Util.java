@@ -2,10 +2,13 @@ package com.xz.utils.netUtils;
 
 import android.util.Log;
 
+import com.xz.utils.encodUtils.MD5Util;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -123,12 +126,58 @@ public class DownloadV2Util {
     /**
      * 断点下载
      * 未完成
+     *
      * @param url
      * @param savePath
-     * @param fileName
      */
-    public void download(String url, final String savePath, final String fileName) {
-
+    public void download(String url, String savePath) {
+        Request request = null;//请求体
+        Call call = null;
+        File file = null;//文件保存目录
+        Response response = null;//请求响应
+        InputStream inputStream = null;
+        RandomAccessFile accessFile = null;//随机文件，可以自由移动文件开始位置
+        long startIndex = 0;//文件下载开始位置
+        try {
+            file = new File(savePath, MD5Util.getMD5(url) + ".tmp");
+            accessFile = new RandomAccessFile(file, "rwd");
+            if (file.exists()) { //如果当前文件夹存在
+                long read = accessFile.length();//获取已经下载文件的大小
+                startIndex = read;
+            }
+            long total = getContentLength(url);
+            Log.e("STARTINDEX", startIndex + "  total: " + total);
+            if (startIndex == total) {
+                return;
+            }
+            request = new Request.Builder().header("RANGE", "bytes=" + startIndex + "-" + total).url(url).build();
+            call = client.newCall(request);
+            response = call.execute();
+            if (response != null && response.body() != null && response.code() == 206) {//206表示服务器支持断点续传
+                inputStream = response.body().byteStream();
+                accessFile.seek(startIndex);//移动到开始下载得位置
+                byte[] blocks = new byte[50 * 1024];
+                int len = -1;
+                while ((len = inputStream.read(blocks)) > 0) {
+                    accessFile.write(blocks, 0, len);
+                }
+                accessFile.close();
+                inputStream.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null)
+                    inputStream.close();
+            } catch (IOException e) {
+            }
+            try {
+                if (accessFile != null)
+                    accessFile.close();
+            } catch (IOException e) {
+            }
+        }
     }
 
 
@@ -193,6 +242,32 @@ public class DownloadV2Util {
             }
         } while (isAgain);
         return file;
+    }
+
+    /**
+     * 返回远端目标文件大小
+     *
+     * @param url 远端url
+     * @return 字节
+     */
+    private long getContentLength(String url) {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Call call = client.newCall(request);
+
+        try {
+            Response response = call.execute();
+            if (response != null && response.body() != null && response.code() == 200) {
+                long length = response.body().contentLength();
+                response.close();
+                return length;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 
 
