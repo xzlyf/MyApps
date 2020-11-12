@@ -2,7 +2,9 @@ package com.xz.utils.netUtils;
 
 import android.util.Log;
 
+import com.orhanobut.logger.Logger;
 import com.xz.utils.encodUtils.MD5Util;
+import com.xz.utils.fileUtils.FileUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -77,7 +79,7 @@ public class DownloadV2Util {
                 byte[] buf = new byte[2048];
                 int len = 0;
                 FileOutputStream fos = null;
-                String sPath = isExistDir(savePath);
+                String sPath = FileUtil.isExistDir(savePath);
                 if (sPath.equals("")) {
                     listener.onFailure(new IOException("目录定位失败"));
                     return;
@@ -87,7 +89,7 @@ public class DownloadV2Util {
                 try {
                     is = response.body().byteStream();
                     long total = response.body().contentLength();
-                    File file = isExistFile(sPath, fileName, 0);
+                    File file = FileUtil.isExistFile(sPath, fileName, 0);
                     Log.d("DownloadUtil", "文件绝对地址：" + file.getAbsolutePath());
                     fos = new FileOutputStream(file);
                     long sum = 0;
@@ -139,6 +141,10 @@ public class DownloadV2Util {
         RandomAccessFile accessFile = null;//随机文件，可以自由移动文件开始位置
         long startIndex = 0;//文件下载开始位置
         try {
+            String sPath = FileUtil.isExistDir(savePath);
+            if (sPath.equals("")) {
+                return;
+            }
             file = new File(savePath, MD5Util.getMD5(url) + ".tmp");
             accessFile = new RandomAccessFile(file, "rwd");
             if (file.exists()) { //如果当前文件夹存在
@@ -161,88 +167,24 @@ public class DownloadV2Util {
                 while ((len = inputStream.read(blocks)) > 0) {
                     accessFile.write(blocks, 0, len);
                 }
-                accessFile.close();
-                inputStream.close();
             }
+            FileUtil.renameFile(file.getParent(),file.getName(),MD5Util.getMD5(url)+".apk");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (inputStream != null)
-                    inputStream.close();
-            } catch (IOException e) {
-            }
             try {
                 if (accessFile != null)
                     accessFile.close();
             } catch (IOException e) {
             }
-        }
-    }
-
-
-    /**
-     * 判断路径是否为目录
-     * 若不存在则创建
-     * <p>
-     * 注意：安卓10已经不支持根目录上创建文件夹
-     * 解决方法： 配置文件加上 android:requestLegacyExternalStorage="true"
-     *
-     * @param saveDir 目标文件夹路径
-     * @return
-     * @throws IOException
-     */
-    private String isExistDir(String saveDir) {
-        // 下载位置
-        File downloadFile = new File(saveDir);
-        if (!downloadFile.exists()) {
-            boolean statue = downloadFile.mkdirs();
-            if (statue) {
-                Log.d("xz", "dir is create ");
-            } else {
-                Log.w("xz", "dir not create ");
-                return "";
+            try {
+                if (inputStream != null)
+                    inputStream.close();
+            } catch (IOException e) {
             }
         }
-        Log.d("xz", "final path:" + downloadFile.getAbsolutePath());
-        return downloadFile.getAbsolutePath();
     }
 
-
-    /**
-     * 如果存在文件同名 就在文件名后面加上_index
-     * 例如： xxx(1).apk    xxx(2).apk   ...
-     *
-     * @param saveDir  保存的目录
-     * @param fileName 文件名
-     * @param index    写0即可
-     * @return
-     */
-    private File isExistFile(String saveDir, String fileName, int index) {
-        boolean isAgain;
-        File file;
-        StringBuilder finalName = new StringBuilder();
-        String[] arry = fileName.split("\\.");
-
-        do {
-            file = new File(saveDir, fileName);
-            if (file.exists()) {
-                isAgain = true;
-                index++;
-                finalName.append(arry[0]);
-                finalName.append("(");
-                finalName.append(index);
-                finalName.append(")");
-                finalName.append(".");
-                finalName.append(arry[1]);
-                fileName = finalName.toString();
-                finalName.delete(0, finalName.length());
-            } else {
-                isAgain = false;
-            }
-        } while (isAgain);
-        return file;
-    }
 
     /**
      * 返回远端目标文件大小

@@ -68,6 +68,16 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        DownloadV2Util downloadV2Util = DownloadV2Util.getInstance();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                downloadV2Util.download("http://wap.apk.anzhi.com/data5/apk/202009/30/1b6ae8af14452f9320a69fa1fb788ef4_16064400.apk"
+                        ,StorageUtil.getExternalDir().getAbsolutePath()+"/apkDownload/");
+            }
+        }).start();
+
+
     }
 
 
