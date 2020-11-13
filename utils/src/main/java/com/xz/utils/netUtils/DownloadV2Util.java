@@ -27,7 +27,7 @@ import okhttp3.Response;
  * 基于Okhttp下载方式的下载器
  */
 public class DownloadV2Util {
-
+    public static final String TAG = DownloadV2Util.class.getName();
     private static DownloadV2Util mInstance;
     private OkHttpClient client;
 
@@ -165,7 +165,11 @@ public class DownloadV2Util {
                 accessFile.seek(startIndex);//移动到开始下载得位置
                 byte[] blocks = new byte[50 * 1024];
                 int len = -1;
+                long sum = 0;
                 while ((len = inputStream.read(blocks)) > 0) {
+                    sum += len;
+                    int progress = (int) (sum * 1.0f / total * 100);
+                    Log.d(TAG, "download: " + progress);
                     accessFile.write(blocks, 0, len);
                 }
             }
@@ -173,16 +177,20 @@ public class DownloadV2Util {
             FileUtil.renameFile(file.getParent(), file.getName(), MD5Util.getMD5(url) + "." + ext);
         } catch (Exception e) {
             e.printStackTrace();
+            Logger.w("下载异常");
         } finally {
+            Logger.w("流关闭");
             try {
                 if (accessFile != null)
                     accessFile.close();
-            } catch (IOException e) {
+            } catch (IOException e2) {
+                e2.printStackTrace();
             }
             try {
                 if (inputStream != null)
                     inputStream.close();
-            } catch (IOException e) {
+            } catch (IOException e3) {
+                e3.printStackTrace();
             }
         }
     }
