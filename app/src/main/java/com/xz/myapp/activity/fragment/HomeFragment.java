@@ -12,6 +12,7 @@ import com.xz.myapp.R;
 import com.xz.myapp.activity.BezierActivity;
 import com.xz.myapp.activity.ButtonActitvity;
 import com.xz.myapp.activity.DialogActivity;
+import com.xz.myapp.activity.DownloadActivity;
 import com.xz.myapp.activity.EventBusActivity;
 import com.xz.myapp.activity.NotificationActivity;
 import com.xz.myapp.activity.SystemInfoActivity;
@@ -55,6 +56,7 @@ public class HomeFragment extends BaseFragment {
         list.add(new ClassEntity("优秀开源框架", MoreApiActivity.class));
         list.add(new ClassEntity("系统信息", SystemInfoActivity.class));
         list.add(new ClassEntity("EventBus", EventBusActivity.class));
+        list.add(new ClassEntity("下载工具类", DownloadActivity.class));
         ClassAdapter adapter = new ClassAdapter(mContext);
         recycler.setLayoutManager(new LinearLayoutManager(mContext));
         recycler.setAdapter(adapter);

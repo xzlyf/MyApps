@@ -127,12 +127,13 @@ public class DownloadV2Util {
 
     /**
      * 断点下载
-     * 未完成
+     * 非主线程执行
      *
      * @param url
-     * @param savePath
+     * @param savePath 存储路径，不用指定文件名称
      */
     public void download(String url, String savePath) {
+        String ext = getFileExtension(url);//文件拓展名
         Request request = null;//请求体
         Call call = null;
         File file = null;//文件保存目录
@@ -168,7 +169,8 @@ public class DownloadV2Util {
                     accessFile.write(blocks, 0, len);
                 }
             }
-            FileUtil.renameFile(file.getParent(),file.getName(),MD5Util.getMD5(url)+".apk");
+            //修正最终拓展名
+            FileUtil.renameFile(file.getParent(), file.getName(), MD5Util.getMD5(url) + "." + ext);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -210,6 +212,31 @@ public class DownloadV2Util {
         }
 
         return -1;
+    }
+
+    /**
+     * 获取下载链接文件拓展名
+     *
+     * @param url
+     * @return
+     */
+    public static String getFileExtension(String url) {
+        String extension = "";
+        String[] pathContents = url.split("[\\\\/]");
+        int pathContentsLength = pathContents.length;
+        String lastPart = pathContents[pathContentsLength - 1];
+        String[] lastPartContents = lastPart.split("\\.");
+        if (lastPartContents.length > 1) {
+            int lastPartContentLength = lastPartContents.length;
+            for (int i = 0; i < lastPartContentLength; i++) {
+                if (i < (lastPartContents.length - 1)) {
+                    if (i < (lastPartContentLength - 2)) {
+                    }
+                }
+            }
+            extension = lastPartContents[lastPartContentLength - 1];
+        }
+        return extension;
     }
 
 
