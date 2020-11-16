@@ -173,6 +173,7 @@ public class DownloadV2Util {
                     accessFile.write(blocks, 0, len);
                 }
             }
+
             //修正最终拓展名
             FileUtil.renameFile(file.getParent(), file.getName(), MD5Util.getMD5(url) + "." + ext);
         } catch (Exception e) {
