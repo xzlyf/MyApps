@@ -1,17 +1,25 @@
 package com.xz.base;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -23,7 +31,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.orhanobut.logger.Logger;
+import com.xz.base.utils.ColorUtil;
 import com.xz.base.utils.ToastUtil;
+import com.xz.base.utils.TransparentBarUtil;
 
 import butterknife.ButterKnife;
 
@@ -230,6 +240,131 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             default:
                 return false;
         }
+    }
+
+    /**
+     * 隐藏状态栏
+     */
+    protected void hideActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+    }
+
+    /**
+     * 显示状态栏
+     */
+    protected void showActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.show();
+        }
+    }
+
+    /**
+     * 设置状态栏颜色
+     */
+    protected void setActionBarColor(int color) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null && actionBar.isShowing()) {
+            actionBar.setBackgroundDrawable(new ColorDrawable(color));
+        }
+    }
+
+    /**
+     * 设置状态栏标题颜色
+     * 基于html原理实现
+     */
+    protected void setActionBarTitleColor(int color) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null && actionBar.isShowing()) {
+            actionBar.setTitle(
+                    Html.fromHtml("<font color=\""
+                            + ColorUtil.int2Hex(color)
+                            + "\">"
+                            + getTitle()
+                            + "</font>"));
+        }
+    }
+
+    /**
+     * 设置返回键颜色
+     */
+    protected void setActionBarBackColor(int color) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar == null) return;
+        @SuppressLint("PrivateResource")
+        Drawable upArrow = getDrawable(R.drawable.abc_ic_ab_back_material);
+        if (upArrow == null) return;
+        upArrow.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        actionBar.setHomeAsUpIndicator(upArrow);
+    }
+
+
+    /**
+     * 隐藏导航栏和底部虚拟按键
+     * 全屏
+     */
+    protected void hideBottomMenu() {
+        if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+    }
+
+    /**
+     * 显示导航栏和底部虚拟按键
+     */
+    protected void showBottomMenu() {
+        if (Build.VERSION.SDK_INT >= 19) {
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.VISIBLE;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+    }
+
+    /**
+     * 隐藏状态栏
+     */
+    protected void hideStatusBar() {
+        TransparentBarUtil.makeStatusBarTransparent(this);
+    }
+
+    /**
+     * 显示状态栏并指定颜色
+     *
+     * @param color
+     */
+    protected void showStatusBar(int color) {
+        TransparentBarUtil.cleanStatusBarTransparent(this, color);
+    }
+
+    /**
+     * 改变状态栏字体颜色
+     */
+    protected void changeStatusBarTextColor() {
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            window.getDecorView().setSystemUiVisibility(View.VISIBLE);
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                //透明底，黑色字
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                window.setStatusBarColor(getResources().getColor(R.color.TRANSPARENT));
+
+            } else {
+                //黑色底，白色字
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.BLACK);
+            }
+        }
+
     }
 
 
