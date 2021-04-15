@@ -2,6 +2,8 @@ package com.xz.utils.netUtils;
 
 import android.Manifest;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
@@ -82,5 +84,28 @@ public class NetInfo {
                 ((i >> 8) & 0xFF) + "." +
                 ((i >> 16) & 0xFF) + "." +
                 (i >> 24 & 0xFF);
+    }
+
+    /**
+     * 判断网络是否可用
+     *
+     * @param context
+     * @return true 可用 false 不可用
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                // 当前网络是连接的
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
+                    // 当前所连接的网络可用
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

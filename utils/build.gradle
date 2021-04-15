@@ -37,6 +37,8 @@ dependencies {
     //logger
     implementation 'com.orhanobut:logger:1.15'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'commons-io:commons-io:2.8.0'
+    implementation project(path: ':apache_code_android')
 
 }
 

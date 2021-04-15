@@ -1,4 +1,4 @@
-package com.xz.utils.appUtils;
+package com.xz.utils.ui;
 
 import android.graphics.Rect;
 import android.view.View;

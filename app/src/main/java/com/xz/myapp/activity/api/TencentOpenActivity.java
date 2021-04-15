@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import com.orhanobut.logger.Logger;
 import com.xz.base.BaseActivity;
 import com.xz.myapp.R;
-import com.xz.utils.appUtils.StringUtil;
+import com.xz.utils.code.StringUtil;
 import com.xz.utils.encodUtils.Base64Util;
 import com.xz.utils.encodUtils.MD5Util;
 import com.xz.utils.netUtils.OkHttpClientManager;

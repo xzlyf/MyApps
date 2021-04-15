@@ -1,4 +1,4 @@
-package com.xz.utils.appUtils;
+package com.xz.utils.code;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -210,5 +210,10 @@ public class StringUtil {
 
         }
         return stringBuilder.toString();
+    }
+
+    // StringBuffer
+    public static String reverse(String str) {
+        return new StringBuilder(str).reverse().toString();
     }
 }

@@ -1,4 +1,4 @@
-package com.xz.utils.appUtils;
+package com.xz.utils.ui;
 
 import android.app.Activity;
 import android.graphics.Color;
