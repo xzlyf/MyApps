@@ -1,3 +1,2 @@
 include ':app', ':ui', ':base', ':utils', ':dialog'
 include ':net'
-include ':apache_code_android'
