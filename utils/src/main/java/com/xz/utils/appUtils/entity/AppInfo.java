@@ -1,4 +1,4 @@
-package com.xz.utils.appUtils;
+package com.xz.utils.appUtils.entity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;

@@ -9,6 +9,8 @@ import android.content.pm.Signature;
 import android.os.Process;
 import android.util.Log;
 
+import com.xz.utils.appUtils.entity.AppInfo;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;

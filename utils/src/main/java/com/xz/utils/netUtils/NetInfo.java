@@ -19,6 +19,31 @@ import java.util.Enumeration;
  * 获取网络基本信息
  */
 public class NetInfo {
+    /**
+     * 获取连接情况
+     *
+     * @return 以下列举常见返回 详情参考 {@link ConnectivityManager#TYPE_MOBILE}
+     * -1 没有连接
+     * 0 移动数据
+     * 1 WIFI
+     * 7 蓝牙数据
+     * 9 以太网
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
+    public static int getConnectedType(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null && mNetworkInfo.isAvailable()) {
+                return mNetworkInfo.getType();
+            }
+        }
+        return -1;
+    }
+
+
+
 
     /**
      * 获取本机ip
